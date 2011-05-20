@@ -1,0 +1,323 @@
+/* 
+    Document   : tests.css
+    Created on : May 5, 2011, 10:38:40 AM
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+.question {
+    position: relative;
+    width: 95%;
+   
+     
+    
+    margin: 10px;
+  
+    border: white solid 1px;
+    border-radius:  5px;
+    
+    background: #8c481e; /* Old browsers */
+    background: -moz-linear-gradient(top, #8c481e 0%, #af491a 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8c481e), color-stop(100%,#af491a)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #8c481e 0%,#af491a 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #8c481e 0%,#af491a 100%); /* Opera11.10+ */
+    background: -ms-linear-gradient(top, #8c481e 0%,#af491a 100%); /* IE10+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8C481E', endColorstr='#AF491A',GradientType=0 ); /* IE6-9 */
+    background: linear-gradient(top, #8c481e 0%,#af491a 100%); /* W3C */
+    }
+
+.questionContent {
+    font-family: cooper;
+    font-size: 14px;
+    color: white;
+    
+    word-wrap:break-word;
+    
+    padding: 5px;
+    padding-right: 60px;
+    text-align: justify;
+}
+
+.questionEditButton{
+    position: absolute;
+    background: url("/images/edit_button.png") center transparent;
+    border: none;
+    
+    right: -20px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+.questionEditButton:hover{
+    position: absolute;
+    background: url("/images/edit_button_hover.png") center transparent;
+    border: none;
+    
+    right: -20px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+
+.questionDeleteButton{
+    position: absolute;
+    background: url("/images/delete_button.png") center transparent;
+    border: none;
+    
+    right: 17px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+.questionDeleteButton:hover{
+    position: absolute;
+    background: url("/images/delete_button_hover.png") center transparent;
+    border: none;
+    
+    right: 17px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+
+.addButton {
+    position: absolute;
+    background: url("/images/add_button.png") center transparent;
+    border: none;
+    
+    right: -25px;
+    bottom: -25px;
+    
+    width: 50px;
+    height: 50px;
+}
+.addButton:hover {
+    position: absolute;
+    background: url("/images/add_button_hover.png") center transparent;
+    border: none;
+    
+    right: -25px;
+    bottom: -25px;
+    
+    width: 50px;
+    height: 50px;
+}
+
+.overlay {
+    visibility: hidden;
+    position: absolute;
+    
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    
+    background-color: rgba(0,0,0,0.7);
+       
+    z-index: 2;
+}
+
+.createQuestionButton{
+    position: absolute;
+    background: url("/images/add_button_large.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.createQuestionButton:hover{
+    position: absolute;
+    background: url("/images/add_button_large_hover.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.updateQuestionButton{
+    position: absolute;
+    background: url("/images/update_button_large.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.updateQuestionButton:hover{
+    position: absolute;
+    background: url("/images/update_button_large_hover.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.cancelButton{
+    position: absolute;
+    background: url("/images/cancel_button_large.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 320px;
+}
+
+.cancelButton:hover{
+    position: absolute;
+    background: url("/images/cancel_button_large_hover.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 320px;
+}
+
+.questionForm{
+    position: relative;
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    
+    width: 475px;
+    height: 382px;
+    
+    background-image: url("/images/add_question_bg.png");
+}
+
+.contentInput {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 370px;
+    height: 50px;
+    
+    background: transparent;
+    border: none;
+    
+    top: 54px;
+    left: 54px;
+}
+
+.answer1Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border: none;   
+    
+    top: 130px;
+    left: 105px;
+}
+
+.answer2Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border:none;
+    
+    top: 158px;
+    left: 105px;
+}
+
+.answer3Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border:none;
+    
+    top: 185px;
+    left: 105px;
+}
+
+.answer4Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border: none;
+    
+    top: 214px;
+    left: 105px;
+}
+
+#answer1, #uanswer1 {
+    position: absolute;
+    top: 130px;
+    left: 60px;
+}
+
+#answer2, #uanswer2 {
+    position: absolute;
+    top: 158px;
+    left: 60px;
+}
+
+#answer3, #uanswer3 {
+    position: absolute;
+    top: 185px;
+    left: 60px;
+}
+
+#answer4, #uanswer4 {
+    position: absolute;
+    top: 214px;
+    left: 60px;
+}
+
+.categorySelect {
+    position:absolute;
+    width: 150px;
+    
+    font-family: "cooper";    
+    border-radius: 15px;
+    
+    top: 250px;
+    left: 260px;
+}

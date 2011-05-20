@@ -1,0 +1,650 @@
+/* 
+    Document   : editTest
+    Created on : May 17, 2011, 8:03:23 PM
+    Author     : colin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.testInfo{
+    position: relative;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    width:652px;
+    height:220px;
+    
+    background-image: url("/images/edit_tests_bg.png");
+}
+
+.testNameInput {
+    position:absolute;
+    background: transparent;
+    border: none;
+    
+    top: 31px;
+    left: 33px;    
+    width:243px;
+    
+    font-family: cooper;
+}
+
+.categoriesLabel {
+    position:absolute;
+    background: transparent;
+    
+    top: 105px;
+    left: 280px;    
+    
+    font-family: cooper;
+    color:white;
+    font-size: 15px;
+}
+
+.categorySelect{
+    position:absolute;
+    background: transparent;
+    border-radius: 30px;
+    
+    width: 140px;
+    height:20px;
+    
+    top: 105px;
+    left: 450px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:black;
+}
+
+.changeDifficultyLabel{
+    position:absolute;
+    background: transparent;
+    
+    top: 70px;
+    left: 280px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:white;
+}
+
+.changeDifficultySelect{
+    position:absolute;
+    background: transparent;
+    border-radius: 30px;
+    
+    width: 140px;
+    height:20px;
+    
+    top: 70px;
+    left: 450px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:black;
+}
+
+.useAllLabel{
+    position:absolute;
+    background: transparent;
+    
+    top: 137px;
+    left: 39px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:white;
+}
+
+.useAllSelect{
+    position:absolute;
+    background: transparent;
+    border-radius: 30px;
+    
+    width: 70px;
+    height:20px;
+    
+    top: 137px;
+    left: 192px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:black;
+}
+
+.numqLabel {
+    position:absolute;
+    background: transparent;
+    
+    top: 105px;
+    left: 39px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:white;
+}
+
+.numqInput{
+    position:absolute;
+    background: transparent;
+    border:none;
+    
+    width: 60px;
+    height:20px;
+    
+    top: 105px;
+    left: 197px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:black;
+}
+
+.tpqLabel{
+    position:absolute;
+    background: transparent;
+    
+    top: 70px;
+    left: 39px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:white;
+}
+
+.tpqInput{
+    position:absolute;
+    background: transparent;
+    border:none;
+    
+    width: 60px;
+    height:20px;
+    
+    top: 70px;
+    left: 197px;    
+    
+    font-family: cooper;
+    font-size: 15px;
+    color:black;
+}
+
+.saveChangesButton{
+    position: absolute;
+    background: url("/images/update_button_large.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 135px;
+    left: 470px;
+}
+
+.saveChangesButton:hover{
+    position: absolute;
+    background: url("/images/update_button_large_hover.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 135px;
+    left: 470px;
+}
+
+.questionEditButton{
+    position: absolute;
+    background: url("/images/edit_button.png") center transparent;
+    border: none;
+    
+    right: -20px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+.questionEditButton:hover{
+    position: absolute;
+    background: url("/images/edit_button_hover.png") center transparent;
+    border: none;
+    
+    right: -20px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+
+.questionDeleteButton{
+    position: absolute;
+    background: url("/images/delete_button.png") center transparent;
+    border: none;
+    
+    right: -20px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+.questionDeleteButton:hover{
+    position: absolute;
+    background: url("/images/delete_button_hover.png") center transparent;
+    border: none;
+    
+    right: -20px;
+    top: -10px;
+    
+    width: 50px;
+    height: 50px;
+}
+
+.addQuestionButton {
+    position: absolute;
+    background: url("/images/add_button.png") center transparent;
+    border: none;
+    
+    right: -25px;
+    bottom: -35px;
+    
+    width: 50px;
+    height: 50px;
+}
+.addQuestionButton:hover {
+    position: absolute;
+    background: url("/images/add_button_hover.png") center transparent;
+    border: none;
+    
+    right: -25px;
+    bottom: -35px;
+    
+    width: 50px;
+    height: 50px;
+}
+
+.overlay {
+    visibility: hidden;
+    position: absolute;
+    
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    
+    background-color: rgba(0,0,0,0.7);
+       
+    z-index: 2;
+}
+
+.createQuestionButton{
+    position: absolute;
+    background: url("/images/add_button_large.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.createQuestionButton:hover{
+    position: absolute;
+    background: url("/images/add_button_large_hover.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.updateQuestionButton{
+    position: absolute;
+    background: url("/images/update_button_large.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.updateQuestionButton:hover{
+    position: absolute;
+    background: url("/images/update_button_large_hover.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 200px;
+}
+
+.cancelButton{
+    position: absolute;
+    background: url("/images/cancel_button_large.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 320px;
+}
+
+.cancelButton:hover{
+    position: absolute;
+    background: url("/images/cancel_button_large_hover.png") center transparent;
+    border: none;    
+    
+    width: 120px;
+    height: 50px;
+    
+    top: 300px;
+    left: 320px;
+}
+
+.questionForm{
+    position: relative;
+    
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    
+    width: 475px;
+    height: 382px;
+    
+    background-image: url("/images/add_question_bg.png");
+}
+
+.contentInput {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 370px;
+    height: 50px;
+    
+    background: transparent;
+    border: none;
+    
+    top: 54px;
+    left: 54px;
+}
+
+.answer1Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border: none;   
+    
+    top: 130px;
+    left: 105px;
+}
+
+.answer2Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border:none;
+    
+    top: 158px;
+    left: 105px;
+}
+
+.answer3Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border:none;
+    
+    top: 185px;
+    left: 105px;
+}
+
+.answer4Input {
+    position: absolute;
+    font-family: cooper;
+    resize: none;
+        
+    width: 305px;
+    height: 23px;
+    
+    background: transparent;
+    border: none;
+    
+    top: 214px;
+    left: 105px;
+}
+
+#answer1, #uanswer1 {
+    position: absolute;
+    top: 130px;
+    left: 60px;
+}
+
+#answer2, #uanswer2 {
+    position: absolute;
+    top: 158px;
+    left: 60px;
+}
+
+#answer3, #uanswer3 {
+    position: absolute;
+    top: 185px;
+    left: 60px;
+}
+
+#answer4, #uanswer4 {
+    position: absolute;
+    top: 214px;
+    left: 60px;
+}
+
+.questionCategorySelect {
+    position:absolute;
+    width: 150px;
+    
+    font-family: "cooper";    
+    border-radius: 15px;
+    
+    top: 250px;
+    left: 260px;
+}
+
+.searchForm {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    top: 200px;
+    
+    background-image: url("/images/search_bg.png");
+    width:632px;
+    height:96px;
+    
+}
+
+.searchLabel{
+    position:absolute;
+    
+    top:17px;
+    left:95px;
+    font-family: cooper;
+    font-size: 15px;
+    color:white;
+}
+
+.seachInput {
+    position:absolute;
+    top: 38px;
+    left:26px;
+    
+    width:440px;
+    height:38px;
+    border:none;
+    resize: none;
+    
+    font-family: cooper;
+    color: black;
+    
+    background:transparent;
+}
+
+.searchButton {
+    position:absolute;
+    top:45px;
+    left:483px;
+    
+    width:140px;
+    height:55px;
+    
+    border: none;
+    background-image: url("/images/search_button_large.png");
+    background-position: center;
+    background-color: transparent;
+}
+
+.searchButton:hover {
+    position:absolute;
+    top:45px;
+    left:483px;
+    
+    width:140px;
+    height:55px;
+    
+    border: none;
+    background-image: url("/images/search_button_large_hover.png");
+    background-position: center;
+    background-color: transparent;
+}
+
+
+.searchQuestionButton{
+    position:absolute;
+    bottom:-35px;
+    right:15px;
+    
+    width:50px;
+    height:50px;
+    
+    border: none;
+    background-image: url("/images/search_button.png");
+    background-position: center;
+    background-color: transparent;
+}
+
+.searchQuestionButton:hover{
+    position:absolute;
+    bottom:-35px;
+    right:15px;
+    
+    width:50px;
+    height:50px;
+    
+    border: none;
+    background-image: url("/images/search_button_hover.png");
+    background-position: center;
+    background-color: transparent;
+}
+
+.searchFormBot{
+    position:relative;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:10px;
+    top:200px;
+    
+    background-image: url("/images/search_bot_bg.png");
+    width:586px;
+    height:14px;
+    
+}
+
+.cancelSearchButton{
+    position: absolute;
+    right: -5px;
+    top: 0px;
+    
+    background: transparent;    
+    background-image: url("/images/cancel_button_large.png");
+    background-position: center;
+    
+    width:120px;
+    height:50px;
+    border:none;
+}
+
+.cancelSearchButton:hover{
+    position: absolute;
+    right: -5px;
+    top: 0px;
+    
+    background: transparent;    
+    background-image: url("/images/cancel_button_large_hover.png");
+    background-position: center;
+    
+    width:120px;
+    height:50px;
+    border:none;
+}
+
+.addToTestButton{
+    position:absolute;
+    
+    background-color: transparent;
+    background-image: url("/images/add_button.png");
+    background-position: center;
+    
+    border:none;
+    
+    width: 50px;
+    height:50px;
+    
+    top:-10px;
+    right:-25px;
+}
+
+.addToTestButton:hover{
+    position:absolute;
+    
+    background-color: transparent;
+    background-image: url("/images/add_button_hover.png");
+    background-position: center;
+    
+    border:none;
+    
+    width: 50px;
+    height:50px;
+    
+    top:-10px;
+    right:-25px;
+}

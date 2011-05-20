@@ -1,0 +1,186 @@
+/* 
+    Document   : login
+    Created on : Apr 29, 2011, 8:24:56 PM
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+
+
+.loginForm{
+    position: relative;
+    
+    background-repeat:no-repeat;
+    background-image: url("../images/login_form.png");
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    width:605px;
+    height:364px;
+}
+
+#header {
+    position: relative;
+    
+    top:100px;
+    
+    background-image: url("../images/login_text.png");   
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    width:605px;
+    height:123px;
+}
+
+#userNameText {
+    position: absolute;
+    
+    top: 183px;
+    left: 184px;
+    
+    text-shadow: 0px 2px 3px #000;
+    
+    font-family: cooper;    
+    color:white;    
+}
+
+#userNameInput {
+    position:absolute;
+    
+    top: 182px;
+    left: 302px;
+    
+    background: none;
+    border: none;
+    font-size: 15px;
+ 
+    
+    color:black;    
+    font-family: cooper;
+}
+
+
+#passwordText {
+    position: absolute;
+    
+    top: 215px;
+    left: 184px;
+    
+    text-shadow:0px 2px 3px #000;
+    
+    font-family: cooper;    
+    color:white;    
+}
+
+#passwordInput {
+    position:absolute;
+    
+    top: 212px;
+    left: 302px;
+    
+    background:none;
+    border: none;
+    font-size: 15px;
+ 
+    
+    color:black;    
+    font-family: cooper;
+}
+
+#submit{
+    position: absolute;    
+    
+    top: 243px;
+    left: 350px;
+    
+    width: 130px;
+    height: 50px;
+    
+    background: transparent url("../images/login.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#submit:hover{
+     position: absolute;    
+    
+    top: 243px;
+    left: 350px;
+    
+    width: 130px;
+    height: 50px;
+    
+    background: transparent url("../images/login_hover.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#register{
+    position: absolute;    
+    
+    top: 243px;
+    left: 150px;
+    
+    width: 162px;
+    height: 50px;
+    
+    background: transparent url("../images/register.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#register:hover{
+     position: absolute;    
+    
+    top: 243px;
+    left: 150px;
+    
+    width: 162px;
+    height: 50px;
+    
+    background: transparent url("../images/register_hover.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#error {   
+    margin-left: auto;
+    margin-right: auto;
+    
+    width:605px;
+    
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.8), 0 0px 200px rgba(0, 0, 0, 0.3) inset;	    
+    border-radius: 15px;
+    
+    color: white;
+    text-shadow:0px 2px 3px #000;
+    font-family: cooper;
+    
+    padding: 10px;
+    
+    text-align: center;
+    
+    background-color: #c40000;
+}

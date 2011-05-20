@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/mvc
+    http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+    >
+        
+
+        
+    <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
+    
+    <!--
+    Most controllers will use the ControllerClassNameHandlerMapping above, but
+    for the index controller we are using ParameterizableViewController, so we must
+    define an explicit mapping for it.
+    --> 
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="index.htm">indexController</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="viewResolver"
+          class="org.springframework.web.servlet.view.InternalResourceViewResolver" />
+          
+    <mvc:annotation-driven />
+
+    
+    <!--
+    The index controller.
+    -->
+    <bean name="indexController"
+          class="org.springframework.web.servlet.mvc.ParameterizableViewController"
+          p:viewName="index" />
+    
+    <bean id="dataSource"
+        class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${database.driver}" />
+        <property name="url" value="${database.url}" />
+        <property name="username" value="${database.user}" />
+        <property name="password" value="${database.password}" />
+    </bean>
+          
+    
+    <!-- ADD PERSISTENCE SUPPORT HERE (jpa, hibernate, etc) -->
+    
+    <bean id="propertyConfigurer"
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"
+          p:location="/WEB-INF/jdbc.properties" />
+    
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>tictac.user.User</value>
+                <value>tictac.test.Test</value>
+                <value>tictac.question.Question</value>
+                <value>tictac.category.Category</value>
+                <value>tictac.test_question.TestQuestion</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hibernateTransactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean >
+    <!-- tx:annotation-driven transaction-manager="hibernateTransactionManager"/ -->
+    
+    
+    
+    <!-- ************************Quartz Schedules ************************************** -->
+    <!-- 
+         Statistics
+     -->
+
+    <bean id="statisticTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+        <property name="jobDetail" ref="statisticDetail"/>
+	<!-- 10 seconds -->
+        <property name="startDelay" value="10000"/>
+	<!-- repeat every 50 seconds -->
+        <property name="repeatInterval" value="60000"/>
+    </bean>
+    
+    <bean id="statisticDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="statisticService"/>
+        <property name="targetMethod" value="update"/>
+        <property name="concurrent" value="false"/>
+    </bean>
+
+    <!-- 
+        Quartz Mapping
+    -->
+    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="statisticTrigger"/>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- ************************Data Access Objects************************************ -->
+    <bean id = "userDao" class = "tictac.user.BasicUserDao">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
+    <bean id = "testDao" class = "tictac.test.BasicTestDao">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" /> 
+        </property>
+    </bean>
+    <bean id = "categoryDao" class = "tictac.category.BasicCategoryDao">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" /> 
+        </property>
+    </bean>
+    <bean id = "questionDao" class = "tictac.question.BasicQuestionDao">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" /> 
+        </property>
+    </bean>
+    <bean id = "testQuestionDao" class = "tictac.test_question.BasicTestQuestionDao">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" /> 
+        </property>
+    </bean>
+    <!-- ******************************Services***************************************** -->
+    
+    <!-- 
+        Service pentru inregistrarea utilizatorilor si logarea log
+    -->    
+    <bean id = "userService" class = "tictac.user.UserService">
+        <property name="params">
+            <ref bean="aplicationParams" />
+        </property>
+        <property name="userDao">
+            <ref bean="userDao" />
+        </property>
+    </bean>
+    
+    <!-- 
+        Service pentru crearea statisticolr
+    -->  
+    <bean id = "statisticService" class = "tictac.statistics.StatisticService">
+        <property name="userDao">
+            <ref bean="userDao" />
+        </property>
+    </bean>
+    
+    
+    <!-- 
+        Service pentru utilizatorii cu drepturi elevate
+    -->   
+    <bean id = "testsService" class = "tictac.test.TestsService">
+        <property name="params">
+            <ref bean="aplicationParams" />
+        </property>
+    </bean>
+    
+    <!-- ********************************Controllers************************************** -->
+        
+    <!--
+        User Controller
+    -->
+    <bean id = "userController" class = "tictac.user.UserController">
+        <property name="userService">
+            <ref bean="userService" /> 
+        </property>
+    </bean>
+    
+    <!--
+        Question Search
+    -->
+    <bean id = "questionSearch" class = "tictac.search.QuestionSearchController">
+        <property name="questionDao">
+            <ref bean="questionDao" /> 
+        </property>
+    </bean>
+    
+    <!--
+        Home Controller
+    -->
+    <bean id = "homeController" class = "tictac.normaluser.NormalUserController">
+    </bean>
+    
+        
+    <!--
+        Super user Controller
+    -->
+    <bean id = "superuserController" class = "tictac.superuser.SuperuserController">
+        <property name="testDao">
+            <ref bean="testDao" /> 
+        </property>
+        <property name="testService">
+            <ref bean="testsService" /> 
+        </property>
+        <property name="categoryDao">
+            <ref bean="categoryDao" /> 
+        </property>
+        <property name="questionDao">
+            <ref bean="questionDao" /> 
+        </property>
+        <property name="testQuestionDao">
+            <ref bean="testQuestionDao" /> 
+        </property>
+    </bean>
+    
+    <!-- *******************************MiscBeans***************************************** -->
+    
+    <!--
+        Folost pentru a tine parametri aplicaitie : logger
+    -->
+    <bean id = "aplicationParams" class = "tictac.core.AplicationParams"/>
+    
+</beans>

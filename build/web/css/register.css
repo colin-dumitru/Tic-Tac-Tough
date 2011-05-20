@@ -1,0 +1,239 @@
+/* 
+    Document   : login
+    Created on : Apr 29, 2011, 8:24:56 PM
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+
+#registerForm{
+    background-repeat:no-repeat;
+    background-image: url("../images/register_form.png");
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    width:605px;
+    height:416px;
+    
+    position: relative;
+}
+
+#header {
+    position: relative;
+    
+    top:100px;
+    left:40px;
+    
+    background-image: url("../images/register_text.png");   
+    background-position: center center;
+    background-repeat: no-repeat;
+    
+    margin-left: auto;
+    margin-right: auto;
+    
+    width:605px;
+    height:123px;
+}
+
+#nameText {
+    position: absolute;
+    
+    top: 155px;
+    left: 195px;
+    
+    text-shadow: 0px 2px 3px #000;
+    
+    font-family: cooper;    
+    color:white;    
+}
+
+#nameInput {
+    position:absolute;
+    
+    top: 154px;
+    left: 302px;
+    
+    background: none;
+    border: none;
+    font-size: 15px;
+ 
+    
+    color:black;    
+    font-family: cooper;
+}
+
+
+#usernameText {
+    position: absolute;
+    
+    top: 185px;
+    left: 195px;
+    
+    text-shadow:0px 2px 3px #000;
+    
+    font-family: cooper;    
+    color:white;    
+}
+
+#usernameInput {
+    position:absolute;
+    
+    top: 184px;
+    left: 302px;
+    
+    
+    background:none;
+    border: none;
+    font-size: 15px;
+ 
+    
+    color:black;    
+    font-family: cooper;
+}
+
+#passwordText {
+    position: absolute;
+    
+    top: 217px;
+    left: 195px;
+    
+    text-shadow:0px 2px 3px #000;
+    
+    font-family: cooper;    
+    color:white;    
+}
+
+#passwordInput {
+    position:absolute;
+    
+    top: 216px;
+    left: 302px;
+    
+    
+    background:none;
+    border: none;
+    font-size: 15px;
+ 
+    
+    color:black;    
+    font-family: cooper;
+}
+
+#emailText {
+    position: absolute;
+    
+    top: 248px;
+    left: 195px;
+    
+    text-shadow:0px 2px 3px #000;
+    
+    font-family: cooper;    
+    color:white;    
+}
+
+#emailInput {
+    position:absolute;
+    
+    top: 247px;
+    left: 302px;
+    
+    
+    background:none;
+    border: none;
+    font-size: 15px;
+ 
+    
+    color:black;    
+    font-family: cooper;
+}
+
+#submit{
+       position: absolute;    
+    
+    top: 290px;
+    left: 350px;
+    
+    width: 162px;
+    height: 50px;
+    
+    background: transparent url("../images/register.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#submit:hover{
+    position: absolute;    
+    
+    top: 290px;
+    left: 350px;
+    
+    width: 162px;
+    height: 50px;
+    
+    background: transparent url("../images/register_hover.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#login{
+    position: absolute;    
+    
+    top: 290px;
+    left: 100px;
+    
+    width: 130px;
+    height: 50px;
+    
+    background: transparent url("../images/login.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#login:hover{
+     position: absolute;    
+    
+    top: 290px;
+    left: 100px;
+    
+    width: 130px;
+    height: 50px;
+    
+    background: transparent url("../images/login_hover.png") no-repeat center;
+    text-decoration: none;
+    display: block;
+    border: none;
+    
+}
+
+#error {   
+    margin-left: auto;
+    margin-right: auto;
+    
+    width:605px;
+    
+    box-shadow: 0 0px 4px rgba(0, 0, 0, 0.8), 0 0px 200px rgba(0, 0, 0, 0.3) inset;	    
+    border-radius: 15px;
+    
+    color: white;
+    text-shadow:0px 2px 3px #000;
+    font-family: cooper;
+    
+    padding: 10px;
+    
+    text-align: center;
+    
+    background-color: #c40000;
+}
