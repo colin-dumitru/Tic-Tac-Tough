@@ -81,7 +81,7 @@ public class TestsService {
             }
         }
         
-        /*iustina nu inteleg*/
+        /*iustina nu intelege */
         return questionList;
     }
     //----------------------------------------------------------------------------------------------
