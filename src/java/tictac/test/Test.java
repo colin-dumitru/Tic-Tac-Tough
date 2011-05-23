@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.dom4j.Element;
+import org.dom4j.dom.DOMElement;
 
 /**
  *
@@ -43,6 +45,13 @@ public class Test implements Serializable {
     
     @Column(name = "useallq")
     protected int _useAllQuestions;
+    
+    public static final int USE_ALL_QUESTIONS = 1;
+    public static final int RESTRAIN_QUESTIONS = 0;
+    
+    public static final int STATIC_DIFFICULTY = 0;
+    public static final int DYNAMIC_DIFFICULTY = 1;
+    
     
     
     
@@ -136,6 +145,38 @@ public class Test implements Serializable {
     public void setUseAllQuestions(int _useAllQuestions) {
         this._useAllQuestions = _useAllQuestions;
     }
-    
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public Element toXML() {
+        Element root  = new DOMElement("test");
+        
+        /*adaugam elementele in xml*/
+        Element id = new DOMElement("id"); root.add(id);
+        id.addAttribute("value", new Long(this._id).toString());
+        
+        Element name = new DOMElement("name"); root.add(name);
+        name.addAttribute("value", this._name);
+        
+        Element categoryid = new DOMElement("categoryid"); root.add(categoryid);
+        categoryid.addAttribute("value", new Long(this._categoryid).toString());
+        
+        Element authorid = new DOMElement("authorid"); root.add(authorid);
+        authorid.addAttribute("value", new Long(this._authorid).toString());
+        
+        Element difficulty = new DOMElement("difficulty"); root.add(difficulty);
+        difficulty.addAttribute("value", new Integer(this._difficulty).toString());
+        
+        Element numq = new DOMElement("numq"); root.add(numq);
+        numq.addAttribute("value", new Integer(this._numq).toString());
+        
+        Element time = new DOMElement("time"); root.add(time);
+        time.addAttribute("value", new Integer(this._time).toString());
+        
+        Element useAllQuestions = new DOMElement("useAllQuestions"); root.add(useAllQuestions);
+        useAllQuestions.addAttribute("value", new Integer(this._useAllQuestions).toString());
+        
+        return root;
+        
+    }
     
 }
