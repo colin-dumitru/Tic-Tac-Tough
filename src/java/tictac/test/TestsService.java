@@ -82,6 +82,7 @@ public class TestsService {
         }
         
         /*verificam cate intrebari sunt in test si daca trebuie folosite toate*/
+        /*iustina nu intelege asta*/
         if(test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS){
             /*folost pentru a scoate o intrebare aleatoare din lista*/
             Random random = new Random(System.currentTimeMillis());
