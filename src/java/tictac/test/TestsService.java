@@ -81,18 +81,7 @@ public class TestsService {
             }
         }
         
-        /*verificam cate intrebari sunt in test si daca trebuie folosite toate*/
-        /*iustina nu intelege asta*/
-        if(test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS){
-            /*folost pentru a scoate o intrebare aleatoare din lista*/
-            Random random = new Random(System.currentTimeMillis());
-            
-            /*cat timp lista de intrebari este mai mare decat cea prescris
-             scoatem cate o intrebare aleatoare*/
-            while(questions.size() > test.getNumq())
-                questions.remove(random.nextInt(questions.size()));
-        }
-        
+        /*iustina nu inteleg*/
         return questionList;
     }
     //----------------------------------------------------------------------------------------------
