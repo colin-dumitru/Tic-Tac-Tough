@@ -1,0 +1,248 @@
+/* 
+    Document   : test
+    Created on : May 24, 2011, 11:05:26 AM
+    Author     : colin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.test{
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    width: 650px;
+}
+
+.testTop {
+    position: relative;
+    display: block;
+    
+    background: transparent;
+    background-image: url("/images/test_bg_top.png");
+    
+    width: 626px;
+    height:57px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.testContent {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    display: block;
+    
+    width: 626px;
+    
+    background: transparent;
+    background-image: url("/images/test_bg_mid.png");
+    background-repeat: repeat-y;
+    
+    font-family: cooper;
+    color: white;        
+}
+
+.testContentText{
+    padding-right: 50px;
+    padding-left: 50px;
+}
+
+.testBottom {
+    position: relative;
+    display: block;
+    
+    background: transparent;
+    background-image: url("/images/test_bg_bot.png");
+    
+    width: 626px;
+    height:41px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.timerCanvas{
+    position: absolute;
+    top:-35px;
+    right:25px;
+}
+
+.timerOverlay {
+    position:absolute;
+    top:-35px;
+    right:25px;
+    
+    background-image: url("/images/timer_shadow.png");
+    
+    width:71px;
+    height:71px;
+}
+
+.timerText{
+    position:absolute;
+    top:-35px;
+    right:25px;
+    
+    font-family: cooper;
+    text-align: center;
+    padding-top: 7px;
+    
+    font-size: 40px;
+    color:white;
+    
+    width:71px;
+    height:71px;
+}
+
+.answer1Button {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    
+    font-family: cooper;
+    color: white;
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button.png"); 
+    background-position: center;
+}
+
+.answer1Button:hover {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    
+    font-family: cooper;
+    color: white;
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button_hover.png"); 
+    background-position: center;
+}
+
+.answer2Button {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    right:0px;
+    
+    font-family: cooper;
+    color: white;
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button.png"); 
+    background-position: center;
+}
+
+.answer2Button:hover {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    right:0px;
+    
+    font-family: cooper;
+    color: white;
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button_hover.png"); 
+    background-position: center;
+}
+
+.answer3Button {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    left:0px;
+    
+    font-family: cooper;
+    color: white;
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button.png"); 
+    background-position: center;
+}
+
+.answer3Button:hover {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    left:0px;
+    
+    font-family: cooper;
+    color: white;
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button_hover.png"); 
+    background-position: center;
+}
+
+.answer4Button {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    left:0px;
+    
+    font-family: cooper;
+    color: white;
+    
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button.png"); 
+    background-position: center;
+}
+
+.answer4Button:hover {
+    position:relative;
+    
+    width:320px;
+    height:58px;
+    
+    top:0px;
+    left:0px;
+    
+    font-family: cooper;
+    color: white;
+    
+        
+    border: none;    
+    background: transparent;
+    background-image: url("/images/answer_button_hover.png"); 
+    background-position: center;
+}
+
