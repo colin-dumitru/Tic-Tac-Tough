@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.dom4j.Element;
 import org.dom4j.dom.DOMElement;
+import org.springframework.format.annotation.NumberFormat;
 
 /**
  *
@@ -29,7 +30,8 @@ public class Test implements Serializable {
     protected String _name;
     
     @Column(name = "categoryid")
-    protected long _categoryid;
+    @NumberFormat
+    protected Long _categoryid;
     
     @Column(name = "qtime")
     protected int _time;
@@ -52,6 +54,11 @@ public class Test implements Serializable {
     public static final int STATIC_DIFFICULTY = 0;
     public static final int DYNAMIC_DIFFICULTY = 1;
     
+    public static final int DIFFICULTY_THRESHOLD  = 3;
+    
+    public static final int HARD_SCORE = 3;   
+    public static final int MEDIUM_SCORE = 2;
+    public static final int EASY_SCORE = 1;
     
     
     
@@ -62,7 +69,7 @@ public class Test implements Serializable {
         this._name = "";
         this._numq = 0;
         this._time = 0;
-        this._categoryid = 0;
+        this._categoryid = 0l;
         this._authorid = 0;
     }
     //----------------------------------------------------------------------------------------------
@@ -77,12 +84,12 @@ public class Test implements Serializable {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
-    public long getCategoryid() {
+    public Long getCategoryid() {
         return _categoryid;
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
-    public void setCategoryid(int _categoryid) {
+    public void setCategoryid(Long _categoryid) {
         this._categoryid = _categoryid;
     }
     //----------------------------------------------------------------------------------------------

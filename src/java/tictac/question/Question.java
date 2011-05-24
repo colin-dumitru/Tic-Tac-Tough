@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import org.dom4j.Element;
 import org.dom4j.dom.DOMElement;
+import org.springframework.format.annotation.NumberFormat;
 
 /**
  *
@@ -39,8 +40,19 @@ public class Question implements Serializable {
     protected String _answer3;
     @Column(name = "answer4")
     protected String _answer4;
+    
+    @NumberFormat
     @Column(name = "correctanswer")
-    protected String _correctAnswer;
+    protected Long _correctAnswer;
+    
+    @NumberFormat
+    @Column(name = "difficulty")
+    protected Long _difficulty;
+    
+    public static final int D_HIGH = 2;
+    public static final int D_MEDIUM = 1;
+    public static final int D_EASY = 0;
+    
     public static final int TAG_MIN_LENGTH = 3;
     public static final int TAG_MAX_LENGTH = 50;
     public static final int CONTENT_MIN_LENGTH = 6;
@@ -53,6 +65,7 @@ public class Question implements Serializable {
         this._categoryId = (long) 0;
         this._content = "";
         this._id = (long) 0;
+        this._difficulty = (long) 0;
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -152,13 +165,13 @@ public class Question implements Serializable {
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
 
-    public String getCorrectAnswer() {
+    public Long getCorrectAnswer() {
         return _correctAnswer;
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
 
-    public void setCorrectAnswer(String _correctAnswer) {
+    public void setCorrectAnswer(Long _correctAnswer) {
         this._correctAnswer = _correctAnswer;
     }
     //----------------------------------------------------------------------------------------------
@@ -186,7 +199,7 @@ public class Question implements Serializable {
         answer4.addAttribute("value", this._answer4);
         
         Element correctAnswer = new DOMElement("correctAnswer"); root.add(correctAnswer);
-        correctAnswer.addAttribute("value", this._correctAnswer);
+        correctAnswer.addAttribute("value", this._correctAnswer.toString());
         
         Element author = new DOMElement("authorId"); root.add(author);
         author.addAttribute("value", this._authorId.toString());
@@ -194,8 +207,22 @@ public class Question implements Serializable {
         Element category = new DOMElement("categoryId"); root.add(category);
         category.addAttribute("value", this._authorId.toString());
         
+        Element difficulty = new DOMElement("difficulty"); root.add(difficulty);
+        difficulty.addAttribute("value", this._difficulty.toString());
+        
         return root;
         
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    public Long getDifficulty() {
+        return _difficulty;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setDifficulty(Long _difficulty) {
+        this._difficulty = _difficulty;
     }
     
 }

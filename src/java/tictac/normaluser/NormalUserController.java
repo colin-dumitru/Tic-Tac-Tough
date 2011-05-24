@@ -9,7 +9,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import tictac.test.Test;
+import tictac.test.TestsService;
 import tictac.user.User;
 
 /**
@@ -18,6 +23,8 @@ import tictac.user.User;
  */
 @Controller
 public class NormalUserController {
+    protected TestsService _testService;
+    
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
     @RequestMapping(value = {"/home"})
@@ -55,10 +62,29 @@ public class NormalUserController {
     //---------------------------------------------------------------------------------------------- 
     @RequestMapping("goToTest/{testId}")
     public String goToTest(HttpSession session, Model model, @PathVariable("testId") long testId){
-        return null; //todo
+         User user = (User) session.getAttribute("user");
+
+        /*verificam daca este logat*/
+        if (user == null) {
+            /*il redirectionam catre pagina principala*/
+            return "/web/home";
+        }
+        
+        /*cream testul*/
+        //this._testService.initializeTest(testId, session);
+        
+        /*intoarcem spre view-ul testului*/        
+        return "/WEB-INF/normalusers/test.jsp"; //todo
     }
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
+    @RequestMapping(value = "advanceTest/{answer}",  method = RequestMethod.GET) 
+    public @ResponseBody String advanceTest(HttpSession session, @PathVariable("answer") long answer){
+        return "";
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+
        
     
 }

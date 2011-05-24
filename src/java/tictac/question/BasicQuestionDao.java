@@ -90,8 +90,13 @@ public class BasicQuestionDao implements QuestionDao{
             throw new TransactionError("Session not opened");
         
         this._session.beginTransaction();
-        this._session.delete(question);
-        this._session.getTransaction().commit();
+        try{
+            this._session.delete(question);
+        } catch(Exception ex) {
+            System.out.println(ex.toString());
+        } finally{
+            this._session.getTransaction().commit();
+        }
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------

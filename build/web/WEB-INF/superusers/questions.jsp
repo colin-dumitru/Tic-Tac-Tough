@@ -22,7 +22,8 @@
     }
    
     //functie pentru redirectionare pt editarea unui test
-    function editQuestion(id, content, answer1, answer2, answer3, answer4, correctAnswer, categoryId) {
+    function editQuestion(id, content, answer1, answer2, answer3, answer4, correctAnswer, categoryId,
+            difficulty) {
         document.getElementById("updateContentInput").innerHTML = content;
         document.getElementById("updateAnswer1").setAttribute("value", answer1);
         document.getElementById("updateAnswer2").setAttribute("value", answer2);
@@ -31,6 +32,7 @@
         
         document.getElementById("uanswer" + correctAnswer).checked = true;
         document.getElementById("updateCategoryId").value = categoryId;
+        document.getElementById("updateDifficultySelect").value = difficulty;
         
         document.getElementById("updateQuestionForm").setAttribute("action", "/web/updateQuestion/" + id);
                 
@@ -93,6 +95,12 @@
                             <form:option id="co${category.categoryId}" value="${category.categoryId}" label="${category.name}" />
                         </c:forEach>
                     </form:select>
+                    
+                    <form:select class="difficultySelect" path="difficulty">
+                        <form:option value='0'>Easy</form:option>
+                        <form:option value='1'>Medium </form:option>
+                        <form:option value='2'>Hard </form:option>
+                    </form:select>
 
                     <input type="submit" class="createQuestionButton" value="" />
                 </form:form>
@@ -135,6 +143,12 @@
                             </form:option>
                         </c:forEach>
                     </form:select>
+                    
+                    <form:select id="updateDifficultySelect" class="difficultySelect" path="difficulty">
+                        <form:option value="0">Easy</form:option>
+                        <form:option value="1">Medium </form:option>
+                        <form:option value="2">Hard </form:option>
+                    </form:select>
 
                     <input type="submit" class="updateQuestionButton" value="" />
 
@@ -154,7 +168,8 @@
                     <button class ="questionDeleteButton" onclick="deleteQuestion(${question.id})"/>
                     <button class = "questionEditButton" onclick="javascript:editQuestion(${question.id},
                         '${question.content}', '${question.answer1}', '${question.answer2}', '${question.answer3}',
-                        '${question.answer4}', '${question.correctAnswer}', '${question.categoryId}');" />
+                        '${question.answer4}', '${question.correctAnswer}', '${question.categoryId}',
+                        '${question.difficulty}');" />
                 </div>
             </c:forEach>
 

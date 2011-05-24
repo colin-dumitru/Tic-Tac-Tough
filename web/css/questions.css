@@ -321,3 +321,14 @@
     top: 250px;
     left: 260px;
 }
+
+.difficultySelect {
+    position:absolute;
+    width: 150px;
+    
+    font-family: "cooper";    
+    border-radius: 15px;
+    
+    top: 275px;
+    left: 260px;
+}

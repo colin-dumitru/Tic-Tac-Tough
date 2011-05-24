@@ -296,7 +296,7 @@ public class SuperuserController {
 
         /*modificam originalul cu datele noului test*/
         original.setAuthorid(new Long(test.getAuthorid()).intValue());
-        original.setCategoryid(new Long(test.getCategoryid()).intValue());
+        original.setCategoryid(test.getCategoryid());
         original.setName(test.getName());
         original.setNumq(test.getNumq());
         original.setTime(test.getTime());
@@ -496,6 +496,7 @@ public class SuperuserController {
         original.setCategoryId(question.getCategoryId());
         original.setContent(question.getContent());
         original.setCorrectAnswer(question.getCorrectAnswer());
+        original.setDifficulty(question.getDifficulty());
 
         /*salvam inapoi originalul in baza de date*/
         try {
