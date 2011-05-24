@@ -27,6 +27,16 @@ public class NormalUserController {
     
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
+    public TestsService getTestService() {
+        return _testService;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+    public void setTestService(TestsService _testService) {
+        this._testService = _testService;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
     @RequestMapping(value = {"/home"})
     public String home(HttpSession session, Model model ) {
         User user = (User) session.getAttribute("user");
@@ -71,7 +81,7 @@ public class NormalUserController {
         }
         
         /*cream testul*/
-        //this._testService.initializeTest(testId, session);
+        this._testService.initializeTest(testId, session);
         
         /*intoarcem spre view-ul testului*/        
         return "/WEB-INF/normalusers/test.jsp"; //todo
@@ -80,7 +90,12 @@ public class NormalUserController {
     //----------------------------------------------------------------------------------------------
     @RequestMapping(value = "advanceTest/{answer}",  method = RequestMethod.GET) 
     public @ResponseBody String advanceTest(HttpSession session, @PathVariable("answer") long answer){
-        return "";
+        User user = (User) session.getAttribute("user");
+        
+        if(user == null)
+            return null;
+        
+        return this._testService.advanceTest(session, answer).asXML();
     }
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------

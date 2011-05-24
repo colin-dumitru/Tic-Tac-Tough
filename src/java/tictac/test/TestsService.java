@@ -61,8 +61,7 @@ public class TestsService {
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     protected List<Question> listQuestions(Test test) {
-        List<Question> questionList = new ArrayList<Question> ();
-        
+       
        List<TestQuestion> linkedQuestions = null;
        
         /*luam lista de legatura de intrebari din etstul respectiv*/
@@ -86,7 +85,7 @@ public class TestsService {
         }
         
         /*iustina nu intelege */
-        return questionList;
+        return questions;
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -130,6 +129,8 @@ public class TestsService {
         session.setAttribute("currentTest", test);
         /*setam intrebarea curent*/
         session.setAttribute("currentQuestion", null);
+        /*numarul total de intrebari*/
+        session.setAttribute("totalQuestions", totalQuestions.size());
         
         /*adaugam listele in sesiune*/
         session.setAttribute("easyQuestions", easyQuestions);
@@ -140,7 +141,7 @@ public class TestsService {
         /*setam dificultatea initala pentru intrebari - dificultatea medie*/
         session.setAttribute("questionDifficulty", Question.D_MEDIUM);        
         /*setam numarul de intrebari gresite consecutiv*/
-        session.setAttribute("consecutiveWrongAnswers", 0);        
+        session.setAttribute("consecutiveWrongAnswers", 0l);        
         /*setam numarul de intrebari raspunse in total*/
         session.setAttribute("answered", 0l);
         /*setam scorul curent*/
@@ -158,22 +159,25 @@ public class TestsService {
         List<Question> mediumQuestions = (List<Question>) session.getAttribute("mediumQuestions");
         List<Question> hardQuestions = (List<Question>) session.getAttribute("hardQuestions");
         
+        /*luam userul pentru care se face testarea*/
+        User user = (User) session.getAttribute("user");
+        long score = (long) session.getAttribute("score");
+        
         if(test == null)
             return null;
         
         /*verfiicam daca s-a terminat testul sau nu*/
         long answered = (long) session.getAttribute("answered");
         
-        if((test.getUseAllQuestions() == Test.USE_ALL_QUESTIONS) && easyQuestions.size() <= 0 &&
-                mediumQuestions.size() <= 0 && hardQuestions.size() <= 0 ) {
-            return null;
+        if(easyQuestions.size() <= 0 && mediumQuestions.size() <= 0 && hardQuestions.size() <= 0 ) {
+            return this.handleTestFinish(user, score, session);
         } else if((test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS) && answered >= test.getNumq()) {
-            return null;
+            return this.handleTestFinish(user, score, session);
         }
         
         /*luam numarul de intrebari gresite consecuive si ajustam dificultatea daca se cere*/
         long wrongAnsweres = (long) session.getAttribute("consecutiveWrongAnswers");
-        long difficulty = (long) session.getAttribute("questionDifficulty");
+        int difficulty =  (int) session.getAttribute("questionDifficulty");
         
         if(test.getDifficulty() == Test.DYNAMIC_DIFFICULTY) {
             if(wrongAnsweres >= Test.DIFFICULTY_THRESHOLD) {
@@ -194,8 +198,6 @@ public class TestsService {
         
         /*daca exista o intrebare curenta, verificam respunsul corect si ajustam scorul userului*/
         Question currentQuestion = (Question) session.getAttribute("currentQuestion");
-        long score = (long) session.getAttribute("score");
-        
         if(currentQuestion != null) {
             score += this.handleQuestionAnswer(currentQuestion, answer);
             session.setAttribute("score", score);
@@ -205,7 +207,47 @@ public class TestsService {
         Question nextQuestion = this.nextQuestion(easyQuestions, hardQuestions, mediumQuestions, difficulty);
         session.setAttribute("currentQuestion", nextQuestion);
         
-        return nextQuestion.toXML();
+        /*facem update la intrebari cu cele scoase*/
+        session.setAttribute("easyQuestions", easyQuestions);
+        session.setAttribute("mediumQuestions", mediumQuestions);
+        session.setAttribute("hardQuestions", hardQuestions);
+        
+        long numq = 0l;
+        
+        if(test.getUseAllQuestions() == Test.USE_ALL_QUESTIONS)
+            numq = (long) session.getAttribute("totalQuestions");
+        else
+            numq = test.getNumq();
+        
+        /*marim numarul de intrebari raspunse*/
+        session.setAttribute("answered", answered + 1l);
+        
+        return this.constructResponse(nextQuestion, numq, answered, test.getTime());
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    protected Element constructResponse(Question question, long totalQuestion, long answered,
+            long timePerQuestion) {
+        /*ceeam xml-ul pt raspuns*/
+        Element root = new DOMElement("response");
+        
+        /*intrebarea propriuzisa*/
+        root.add(question.toXML());
+        
+        /*numarul total de inrebari*/
+        Element questionsElement = new DOMElement("total");
+        questionsElement.addAttribute("value", new Long(totalQuestion).toString());
+        root.add(questionsElement);
+        /*nuamrul de intrebari raspunse*/
+        Element answeredElement = new DOMElement("answered");
+        answeredElement.addAttribute("value", new Long(answered).toString());
+        root.add(answeredElement);
+        /*timpul pe intrebare*/
+        Element timePerQuestionElement = new DOMElement("timePerQuestion");
+        timePerQuestionElement.addAttribute("value", new Long(timePerQuestion).toString());
+        root.add(timePerQuestionElement);
+        
+        return root;
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------

@@ -2,25 +2,32 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-var totalTime = 40.0;
-var remainingTime = 40.0;
+var totalTime = 10.0;
+var remainingTime = 10.0;
 var context ;
+var working = false;
 
 function initialize() {
     context  = document.getElementById("timerCanvas").getContext("2d");
+    
+    /*luam prima intrebare din test*/
+    advanceQuestion(0);
     
     /*creeam timerul pentru functia de update*/
     update();
 }
 
 function update() {
-    /*facem update la timpul ramas*/
-    updateTime();
-    /*afisam timpul ramas*/
-    drawTime();
-    
-    if(remainingTime <= 0) {
-        advanceQuestion(0);
+    if(working) {
+        /*facem update la timpul ramas*/
+        updateTime();
+        /*afisam timpul ramas*/
+        drawTime();
+
+
+        if(remainingTime <= 0) {
+            advanceQuestion(0);
+        }
     }
     
     setTimeout("update()",1000);
@@ -33,9 +40,51 @@ function advanceQuestion(answer) {
         dataType: "xml",
         success: parseQuestion
     });
+    
+    working = false;
 }
 
 function parseQuestion(XmlData) {
+    var question = $(XmlData).find("question");
+    var response = $(XmlData).find("response");
+    var result = $(XmlData).find("result");
+    
+    if(question.length != 0) {
+        updateQuestion(question[0])
+    }
+    if(response.length != 0) {
+        updateResponse(response);
+    }
+    if(result.length != 0) {
+        updateResult(result);
+    }
+    
+    working = true;
+}
+
+function updateQuestion(question) {
+    /*continutul*/
+    $("#testContentText").html($(question).find("content")[0].getAttribute("value"));
+    
+    /*raspunsurile*/
+    $("#answer1Button").html($(question).find("answer1")[0].getAttribute("value"));
+    $("#answer2Button").html($(question).find("answer2")[0].getAttribute("value"));
+    $("#answer3Button").html($(question).find("answer3")[0].getAttribute("value"));
+    $("#answer4Button").html($(question).find("answer4")[0].getAttribute("value"));
+    
+}
+
+function updateResponse(response) {
+    totalTime = $(response).find("timePerQuestion")[0].getAttribute("value");
+    
+    resetTimer();
+}
+
+function resetTimer(){
+    remainingTime = totalTime;
+}
+
+function updateResult(result) {
     
 }
 

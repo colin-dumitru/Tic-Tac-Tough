@@ -25,21 +25,19 @@
             <div class="testTop"></div>
             <div id="testContent" class="testContent">
                 <div class="testContentText" id ="testContentText">
-                    Mama face mere, daca mama face mere, ce face ea?
+                    Waiting for server...
                 </div>
             </div>
             <div class="testBottom" > </div>
-            
+
             <canvas id="timerCanvas" class="timerCanvas" width="71" height="71" > </canvas>
             <div class="timerText" id="timerText" > 40 </div>
             <div class="timerOverlay" > </div>
-            
-            <form>
-                <button class="answer1Button" >Answer 1</button>
-                <button class="answer2Button" >Answer 2</button>
-                <button class="answer3Button" >Answer 3</button>
-                <button class="answer4Button" >Answer 4</button>
-            </form>
+
+            <button class="answer1Button" id="answer1Button" onclick="advanceQuestion(1)">No answers yet...</button>
+            <button class="answer2Button" id="answer2Button" onclick="advanceQuestion(2)">No answers yet...</button>
+            <button class="answer3Button" id="answer3Button" onclick="advanceQuestion(3)">No answers yet...</button>
+            <button class="answer4Button" id="answer4Button" onclick="advanceQuestion(4)">No answers yet...</button>
         </div>
     </body>
 </html>

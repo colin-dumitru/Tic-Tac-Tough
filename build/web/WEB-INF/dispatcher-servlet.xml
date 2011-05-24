@@ -215,9 +215,12 @@
     </bean>
     
     <!--
-        Home Controller
+        Normal User Controller
     -->
-    <bean id = "homeController" class = "tictac.normaluser.NormalUserController">
+    <bean id = "normalController" class = "tictac.normaluser.NormalUserController">
+        <property name="testService">
+            <ref bean="testsService" />
+        </property>
     </bean>
     
         
