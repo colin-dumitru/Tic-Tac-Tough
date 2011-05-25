@@ -40,7 +40,7 @@ function parseTopUsers(xmlData) {
         $("#topUsersResult").append(
         "<div class='contentItem'>\
             <div class='contentText'>" + 
-                $(this).content +
+                this.textContent +
             "</div>" +
         "</div>");
     });
@@ -60,7 +60,7 @@ function parseTopTests(xmlData) {
         $("#topTestsResult").append(
         "<div class='contentItem'>\
             <div class='contentText'>" + 
-                $(this).content +
+                this.textContent +
             "</div>" +
         "</div>");
     });

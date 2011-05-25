@@ -8,11 +8,15 @@ function runTestSearch(url,query){
         type: "GET",
         url: "/web/searchTest/",
         data: ({
-            querry : query
+            querry : query,
+            categoryId: $("#categoryId").val()
         }),
         dataType: "xml",
         success: parseTestResult
     });
+    
+    $('#testSearchResult').animate({
+    height: $('#testSearchResult').height()}, 0);
     
 }
 
@@ -26,19 +30,24 @@ function deleteTest(testId) {
 
 function parseTestResult(xmlData){
     $("#testSearchResult").html("");
+    var height = 20;
     
     $(xmlData).find("test").each(function()
     {        
         $("#testSearchResult").append(
-        "<div class='contentItem'>\
+        "<div class='contentItem' id='item" + $(this).find("id").attr("value") + "'>\
             <div class='contentText'>" + 
                 $(this).find("name").attr("value") +
             "</div>" +
             "<button class='goToTestButton' onclick='goToTest("
-                + $(xmlData).find("id").attr("value") + 
+                + $(this).find("id").attr("value") + 
                 ")' value='add'/>" +
         "</div>");
+        
+        height += $("#item" + $(xmlData).find("id").attr("value")).height() + 10;
     });
+    
+     $('#testSearchResult').animate({height: height}, 500);
 }
 
 

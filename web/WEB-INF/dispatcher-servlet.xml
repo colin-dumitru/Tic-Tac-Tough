@@ -96,7 +96,7 @@
         <property name="jobDetail" ref="statisticDetail"/>
 	<!-- 10 seconds -->
         <property name="startDelay" value="10000"/>
-	<!-- repeat every 50 seconds -->
+	<!-- repeat every 60 seconds -->
         <property name="repeatInterval" value="60000"/>
     </bean>
     
@@ -164,6 +164,9 @@
         <property name="userDao">
             <ref bean="userDao" />
         </property>
+        <property name="testDao">
+            <ref bean="testDao" />
+        </property>
         <property name="params">
             <ref bean="aplicationParams" />
         </property>
@@ -207,6 +210,9 @@
         <property name="questionDao">
             <ref bean="questionDao" /> 
         </property>
+        <property name="testQuestionDao">
+            <ref bean="testQuestionDao" /> 
+        </property>
     </bean>
     
     <!--
@@ -225,6 +231,9 @@
         <property name="testService">
             <ref bean="testsService" />
         </property>
+        <property name="categoryDao">
+            <ref bean="categoryDao" />
+         </property>        
     </bean>
     
         
@@ -255,7 +264,9 @@
         Folost pentru a tine parametri aplicaitie : logger
     -->
     <bean id = "aplicationParams" class = "tictac.core.AplicationParams">
-        <property name="context"> <ref bean="servletContext" /></property>
+        <property name="context"> 
+            <ref bean="servletContext" />
+        </property>
     </bean>
     
 </beans>

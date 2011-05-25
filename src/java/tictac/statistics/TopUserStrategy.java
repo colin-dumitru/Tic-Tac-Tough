@@ -27,7 +27,7 @@ import tictac.user.UserDao;
  */
 public class TopUserStrategy implements UserStatisticStrategy{
     public static final int D_LIST_SIZE = 10;
-    public static final String D_XML_PATH = "top_users.xml";
+    public static final String D_XML_PATH = "rss/top_users.xml";
     
     protected AplicationParams _params;
     
@@ -54,7 +54,7 @@ public class TopUserStrategy implements UserStatisticStrategy{
         /*inversam lista*/
         java.util.Collections.reverse(users);
         
-        this.createXml(D_XML_PATH, users);
+        this.createXml(TopUserStrategy.D_XML_PATH, users);
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ public class TopUserStrategy implements UserStatisticStrategy{
             Element item = doc.createElement("item"); chanel.appendChild(item);
             
             Element ititle = doc.createElement("title"); item.appendChild(ititle);
-            ititle.appendChild(doc.createTextNode(user.getUserName() + "(" + user.getTestScore() + ")"));
+            ititle.appendChild(doc.createTextNode(user.getUserName().trim() + "(" + user.getTestScore() + ")"));
             
             Element ilink = doc.createElement("link"); item.appendChild(ilink);
             Element idescription = doc.createElement("description"); item.appendChild(idescription);            
@@ -94,7 +94,7 @@ public class TopUserStrategy implements UserStatisticStrategy{
         FileOutputStream out = null;
          
         try {
-            out = new FileOutputStream(this._params.getContext().getContextPath() + path);
+            out = new FileOutputStream(this._params.getContext().getRealPath(path));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TopUserStrategy.class.getName()).log(Level.SEVERE, null, ex);
             return;

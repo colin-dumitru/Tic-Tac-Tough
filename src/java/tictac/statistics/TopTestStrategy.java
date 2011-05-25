@@ -15,6 +15,7 @@ import org.w3c.dom.Element;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import tictac.core.AplicationParams;
 import tictac.test.Test;
 import tictac.test.TestDao;
 import tictac.user.TransactionError;
@@ -26,8 +27,12 @@ import tictac.user.TransactionError;
 public class TopTestStrategy implements TestStaticticStrategy {
 
     public static final int D_LIST_SIZE = 10;
-    public static final String D_XML_PATH = "top_tests.xml";
+    public static final String D_XML_PATH = "rss/top_tests.xml";
+    
+    protected AplicationParams _params;
 
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     @Override
     public void update(TestDao testDao) {
         List<Test> tests = null;
@@ -50,9 +55,10 @@ public class TopTestStrategy implements TestStaticticStrategy {
         /*inversam lista*/
         java.util.Collections.reverse(tests);
 
-        this.createXml(D_XML_PATH, tests);
+        this.createXml(TopTestStrategy.D_XML_PATH, tests);
     }
-
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     private void createXml(String path, List<Test> tests) {
         Document doc = new DocumentImpl();
         
@@ -79,7 +85,7 @@ public class TopTestStrategy implements TestStaticticStrategy {
             Element item = doc.createElement("item"); chanel.appendChild(item);
             
             Element ititle = doc.createElement("title"); item.appendChild(ititle);
-            ititle.appendChild(doc.createTextNode(test.getName() + "(" + test.getAccessed() + ")"));
+            ititle.appendChild(doc.createTextNode(test.getName().trim() + "(" + test.getAccessed() + ")"));
             
             Element ilink = doc.createElement("link"); item.appendChild(ilink);
             Element idescription = doc.createElement("description"); item.appendChild(idescription);            
@@ -89,7 +95,7 @@ public class TopTestStrategy implements TestStaticticStrategy {
         FileOutputStream out = null;
          
         try {
-            out = new FileOutputStream(path);
+             out = new FileOutputStream(this._params.getContext().getRealPath(path));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TopUserStrategy.class.getName()).log(Level.SEVERE, null, ex);
             return;
@@ -110,5 +116,12 @@ public class TopTestStrategy implements TestStaticticStrategy {
             Logger.getLogger(TopUserStrategy.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    @Override
+    public void setParams(AplicationParams params) {
+        this._params = params;
     }
 }

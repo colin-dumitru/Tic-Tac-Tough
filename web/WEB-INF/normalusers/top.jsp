@@ -31,8 +31,8 @@
             </div>
         </div>
 
-        <div class="content" id="topTestsResult">
-            <div class="topLabel" >Our top 10 tests (most accessed) are:</div>
+        <div class="content" style="margin-top: 10px" id="topTestsResult">
+            <div class="topLabel">Our top 10 tests (most accessed) are:</div>
             <div class="contentItem" >
                 <div class="contentText" >
                     Processing..

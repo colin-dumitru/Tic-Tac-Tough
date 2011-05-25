@@ -5,6 +5,9 @@
 package tictac.normaluser;
 
 
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import tictac.category.Category;
+import tictac.category.CategoryDao;
 import tictac.test.Test;
 import tictac.test.TestsService;
+import tictac.user.TransactionError;
 import tictac.user.User;
 
 /**
@@ -24,6 +30,7 @@ import tictac.user.User;
 @Controller
 public class NormalUserController {
     protected TestsService _testService;
+    protected CategoryDao _categoryDao;
     
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
@@ -66,6 +73,17 @@ public class NormalUserController {
             /*il redirectionam catre pagina principala*/
             return "/web/home";
         }
+        
+        /*adaugam si lista de categorii cand face filtrarea*/
+         List<Category> categories = null;
+        try {
+            /* luam lista de categorii si o trimitem la view*/
+            categories = this._categoryDao.listCategories();
+        } catch (TransactionError ex) {
+            Logger.getLogger(NormalUserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        model.addAttribute("categories", categories);
+        
         return "/WEB-INF/normalusers/listTests.jsp";
     }
     //----------------------------------------------------------------------------------------------    
@@ -107,6 +125,16 @@ public class NormalUserController {
             return null;
         
         return "/WEB-INF/normalusers/top.jsp";
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+    public CategoryDao getCategoryDao() {
+        return _categoryDao;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+    public void setCategoryDao(CategoryDao _categoryDao) {
+        this._categoryDao = _categoryDao;
     }
        
     

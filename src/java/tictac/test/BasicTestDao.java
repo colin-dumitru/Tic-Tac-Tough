@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.classic.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import tictac.question.Question;
@@ -128,5 +129,22 @@ public class BasicTestDao implements TestDao{
         this._session.beginTransaction();
         this._session.delete(test);
         this._session.getTransaction().commit();
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    @Override
+    public List<Test> listTestsByAccessed(boolean ascending) throws TransactionError {
+         if (this._session == null || !this._session.isOpen()) {
+            throw new TransactionError("Session not opened");
+        }
+
+        List<Test> ret = null;
+        if (ascending) {
+            ret = (List<Test>) this._session.createCriteria(Test.class).addOrder(Order.asc("_accessed")).list();
+        } else {
+            ret = (List<Test>) this._session.createCriteria(Test.class).addOrder(Order.desc("_accessed")).list();
+        }
+
+        return ret;
     }
 }

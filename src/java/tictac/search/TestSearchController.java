@@ -31,7 +31,7 @@ public class TestSearchController {
 
     @RequestMapping(value = "/searchTest", method = RequestMethod.GET)
     public @ResponseBody
-    String getTime(@RequestParam String querry) {
+    String getTime(@RequestParam String querry, @RequestParam Long categoryId) {
         Element root = new DOMElement("result");
         
         List<Test> result = null;        
@@ -44,7 +44,9 @@ public class TestSearchController {
         }
         
         for(Test test : result) {
-            root.add(test.toXML());
+            /*verificam si daca testul are categoria care trebuie*/
+            if(test.getCategoryid().equals(categoryId))
+                 root.add(test.toXML());
         }
         
         return root.asXML();

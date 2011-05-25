@@ -191,13 +191,7 @@ public class TestsService {
         
         /*verfiicam daca s-a terminat testul sau nu*/
         long answered = (long) session.getAttribute("answered");
-        
-        if(easyQuestions.size() <= 0 && mediumQuestions.size() <= 0 && hardQuestions.size() <= 0 ) {
-            return this.handleTestFinish(user, score, session);
-        } else if((test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS) && answered >= test.getNumq()) {
-            return this.handleTestFinish(user, score, session);
-        }
-        
+     
         /*luam numarul de intrebari gresite consecuive si ajustam dificultatea daca se cere*/
         long wrongAnsweres = (long) session.getAttribute("consecutiveWrongAnswers");
         int difficulty =  (int) session.getAttribute("questionDifficulty");
@@ -222,13 +216,17 @@ public class TestsService {
         /*daca exista o intrebare curenta, verificam respunsul corect si ajustam scorul userului*/
         Question currentQuestion = (Question) session.getAttribute("currentQuestion");
         if(currentQuestion != null) {
-            score += this.handleQuestionAnswer(currentQuestion, answer);
+            /*luam timpul cand a fost tirmisa intrebarea*/
+            long sentTime = (long) session.getAttribute("sentTime");
+            
+            score += this.handleQuestionAnswer(currentQuestion, answer, sentTime, test.getTime() * 1000);
             session.setAttribute("score", score);
         }
-        
+ 
         /*apoi luam urmatoarea intrebare*/
         Question nextQuestion = this.nextQuestion(easyQuestions, hardQuestions, mediumQuestions, difficulty);
         session.setAttribute("currentQuestion", nextQuestion);
+        session.setAttribute("sentTime", System.currentTimeMillis());
         
         /*facem update la intrebari cu cele scoase*/
         session.setAttribute("easyQuestions", easyQuestions);
@@ -244,6 +242,13 @@ public class TestsService {
         
         /*marim numarul de intrebari raspunse*/
         session.setAttribute("answered", answered + 1l);
+        
+         /*verificam daca s-au terminat intrebarile*/
+        if(easyQuestions.size() <= 0 && mediumQuestions.size() <= 0 && hardQuestions.size() <= 0 ) {
+            return this.handleTestFinish(user, score, session);
+        } else if((test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS) && answered >= test.getNumq()) {
+            return this.handleTestFinish(user, score, session);
+        } 
         
         return this.constructResponse(nextQuestion, numq, answered, test.getTime());
     }
@@ -324,8 +329,8 @@ public class TestsService {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
-    protected long handleQuestionAnswer(Question current, long answer) {
-        if(current.getCorrectAnswer() == answer) {
+    protected long handleQuestionAnswer(Question current, long answer, long timeStarted, long questionTime) {
+        if(current.getCorrectAnswer() == answer && ((System.currentTimeMillis() - timeStarted) < questionTime)) {
             switch(current.getDifficulty().intValue()) {
                 case Question.D_EASY:
                     return Test.EASY_SCORE;

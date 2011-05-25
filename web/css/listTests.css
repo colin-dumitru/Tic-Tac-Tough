@@ -20,7 +20,7 @@ root {
     position: relative;
     margin-right: auto;
     margin-left: auto;
-    top: 100px;
+    top: 0px;
     
     background-image: url("/images/search_bg.png");
     width:632px;
@@ -56,7 +56,7 @@ root {
 
 .searchButton {
     position:absolute;
-    top:45px;
+    top:50px;
     left:483px;
     
     width:140px;
@@ -70,7 +70,7 @@ root {
 
 .searchButton:hover {
     position:absolute;
-    top:45px;
+    top:50px;
     left:483px;
     
     width:140px;
@@ -114,3 +114,13 @@ root {
     right:-25px;
 }
 
+.categorySelect{
+    position:absolute;
+    
+    top:33px;
+    right: 25px;
+    width: 110px;
+    border-radius:10px;
+    
+    font-family: cooper;
+}

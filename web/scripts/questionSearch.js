@@ -7,7 +7,8 @@ function runQuestionSearch(url, query) {
         type: "GET",
         url: "/web/searchQuestion/",
         data: ({
-            querry : query
+            querry : query,
+            testId : testId
         }),
         dataType: "xml",
         success: parseQuestionResult

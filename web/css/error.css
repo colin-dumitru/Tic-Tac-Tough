@@ -1,0 +1,62 @@
+/* 
+    Document   : error
+    Created on : May 25, 2011, 4:03:28 PM
+    Author     : colin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.errorContent{
+    position: relative;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(135,8,8)),
+        color-stop(1, rgb(107,28,28))
+        );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(135,8,8) 0%,
+        rgb(107,28,28) 100%);
+
+    border-radius:10px;
+    padding:5px;
+    box-shadow: 0px 0px 20px black;
+    
+    font-family: cooper;
+    border:white solid 2px;
+
+    width: 600px;    
+}
+
+.errorContent h1{
+    color:white;
+    
+    text-align: center;
+}
+
+.error{
+    background: rgba(255,255,255,0.1);
+    
+    margin: 6px;
+    padding: 4px;
+    width: 96%;
+    border-radius:5px;
+    border:white solid 2px;
+    
+    color:white;
+}

@@ -27,6 +27,8 @@ html{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8AC8E2', endColorstr='#29ABE2',GradientType=0 ); /* ie */
     background: -o-linear-gradient(top, #8AC8E2 0%,#29ABE2 100%); /* opera */
     
+    background-attachment: fixed;
+    
     height: 100%;
 }
 

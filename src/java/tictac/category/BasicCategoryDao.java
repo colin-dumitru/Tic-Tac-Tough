@@ -49,7 +49,8 @@ public class BasicCategoryDao implements CategoryDao{
         
         this._session.getTransaction().commit();
     }
-
+//----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     @Override
     @SuppressWarnings("unchecked")
     public List<Category> listCategories() throws TransactionError {
@@ -59,7 +60,8 @@ public class BasicCategoryDao implements CategoryDao{
         List<Category> list=this._session.createCriteria(Category.class).list();
         return list;
     }
-
+//----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     @Override
     public Category findCategory(String categoryName) throws TransactionError {
         if(this._session == null || !this._session.isOpen())

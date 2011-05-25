@@ -4,6 +4,7 @@
  */
 package tictac.statistics;
 
+import tictac.core.AplicationParams;
 import tictac.test.TestDao;
 
 /**
@@ -12,5 +13,6 @@ import tictac.test.TestDao;
  */
 public interface TestStaticticStrategy {
         public void update  (TestDao userDao);
+        public void setParams(AplicationParams params);
     
 }

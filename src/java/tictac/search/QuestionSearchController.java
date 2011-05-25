@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tictac.question.Question;
 import tictac.question.QuestionDao;
+import tictac.test_question.TestQuestionDao;
 import tictac.user.TransactionError;
 
 /**
@@ -25,13 +26,14 @@ import tictac.user.TransactionError;
 @Controller
 public class QuestionSearchController {
     protected QuestionDao _questionDao;
+    protected TestQuestionDao _testQuestionDao;
     
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
 
     @RequestMapping(value = "/searchQuestion", method = RequestMethod.GET)
     public @ResponseBody
-    String getTime(@RequestParam String querry) {
+    String getTime(@RequestParam String querry, @RequestParam Long testId) {
         Element root = new DOMElement("result");
         
         List<Question> result = null;        
@@ -44,7 +46,14 @@ public class QuestionSearchController {
         }
         
         for(Question question : result) {
-            root.add(question.toXML());
+            /*adaugam intrebarea doar daca ea nu este deja in test*/
+            try {
+                if(testId != null && 
+                        this._testQuestionDao.listQuestionsWithLink(testId, question.getId()).size() <= 0)
+                    root.add(question.toXML());
+            } catch (TransactionError ex) {
+                Logger.getLogger(QuestionSearchController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
         return root.asXML();
@@ -59,4 +68,15 @@ public class QuestionSearchController {
     public void setQuestionDao(QuestionDao _questionDao) {
         this._questionDao = _questionDao;
     }
+     //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public TestQuestionDao getTestQuestionDao() {
+        return _testQuestionDao;
+    }
+     //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setTestQuestionDao(TestQuestionDao _testQuestionDao) {
+        this._testQuestionDao = _testQuestionDao;
+    }
+    
 }

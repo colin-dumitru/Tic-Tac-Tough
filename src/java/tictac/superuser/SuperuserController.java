@@ -434,6 +434,14 @@ public class SuperuserController {
         if(questions == null || questions.size() != 1)
             return;
         
+        try {
+            /*verificam daca intrebarea este deja in test*/
+            if(this._testQuestionDao.listQuestionsWithLink(testId, questionId).size() > 0)
+                return;
+        } catch (TransactionError ex) {
+            Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         /*adaugam legatura in baza de date*/
         TestQuestion testQuestion = new TestQuestion(testId, questionId);
         

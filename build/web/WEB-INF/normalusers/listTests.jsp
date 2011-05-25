@@ -9,6 +9,10 @@
 <LINK rel="stylesheet" href="/css/listTests.css" type="text/css" />
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <script type="text/javascript" src="/scripts/jquery.js"></script>
 <script type="text/javascript" src="/scripts/testSearch.js"></script>
 
@@ -28,12 +32,21 @@
             <div class="searchForm">
                 <div class="searchLabel">Content:</div>
                 <textarea id="searchInput" class="searchInput"> </textarea>
+                
+                <select class="categorySelect" id="categoryId">
+                        <c:forEach var="category" items="${categories}">
+                            <option id="co${category.categoryId}" value="${category.categoryId}" >
+                                ${category.name}
+                            </option>
+                        </c:forEach>
+                </select>
+                
                 <button class="searchButton"
                     onclick="runTestSearch('/web/searchTest', document.getElementById('searchInput').value);" />
             
             </div>
             
-            <div class="content" style="top:200px;" id="testSearchResult">
+            <div  class="content" id="testSearchResult">
                  <div class = "contentItem">
                     <div class = "contentText" >No search results...</div>
                 </div>
