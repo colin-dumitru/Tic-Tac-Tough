@@ -164,6 +164,9 @@
         <property name="userDao">
             <ref bean="userDao" />
         </property>
+        <property name="testDao">
+            <ref bean="testDao" />
+        </property>
     </bean>
     
     

@@ -21,4 +21,6 @@ public interface TestDao {
 
     public List<Test> findTestWithName(String querry) throws TransactionError;
     
+    public List<Test> listTestsByAccessed(boolean ascending) throws TransactionError;
+    
 }

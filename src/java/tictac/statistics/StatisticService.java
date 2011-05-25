@@ -4,7 +4,7 @@
  */
 package tictac.statistics;
 
-import org.springframework.scheduling.quartz.QuartzJobBean;
+import tictac.test.TestDao;
 import tictac.user.UserDao;
 
 /**
@@ -13,18 +13,27 @@ import tictac.user.UserDao;
  */
 public class StatisticService {
     protected UserDao _userDao;    
+    protected TestDao _testDao;    
     protected UserStatisticStrategy _userStrategy;
+    protected TestStaticticStrategy _testStrategy;
     
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     public void update() {
-         this.updateUserTop();       
+         this.updateUserTop();
+         this.updateTestTop();
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
-    protected void updateUserTop() {
+    protected void updateUserTop() {        
         this.setUserStrategy(new TopUserStrategy());
         this.compute();
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    private void updateTestTop() {
+        this.setTestStrategy(new TopTestStrategy());
+        this.compute();    
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -33,9 +42,17 @@ public class StatisticService {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
+    public void setTestStrategy(TestStaticticStrategy _testStrategy) {
+        this._testStrategy = _testStrategy;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     protected void compute() {
         if(this._userStrategy != null) {
             this._userStrategy.update(_userDao);
+        }
+        if(this._testStrategy != null) {
+            this._testStrategy.update(_testDao);
         }
     }
     //----------------------------------------------------------------------------------------------
@@ -48,5 +65,17 @@ public class StatisticService {
     public void setUserDao(UserDao _userDao) {
         this._userDao = _userDao;
     }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public TestDao getTestDao() {
+        return _testDao;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setTestDao(TestDao _testDao) {
+        this._testDao = _testDao;
+    }
+    
+    
     
 }

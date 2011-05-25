@@ -82,7 +82,7 @@ public class NormalUserController {
         
         /*cream testul*/
         this._testService.initializeTest(testId, session);
-        
+        this._testService.incrementTestAccessed(testId);
         /*intoarcem spre view-ul testului*/        
         return "/WEB-INF/normalusers/test.jsp"; //todo
     }
@@ -99,7 +99,15 @@ public class NormalUserController {
     }
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
-
+    @RequestMapping(value = "/top")
+    public String top(HttpSession session){
+        User user = (User) session.getAttribute("user");
+        
+        if(user == null)
+            return null;
+        
+        return "/WEB-INF/normalusers/top.jsp";
+    }
        
     
 }
