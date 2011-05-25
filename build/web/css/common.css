@@ -12,8 +12,8 @@
 */
 
 @font-face {
-	font-family: cooper;
-	src: url('/fonts/CooperBlackStd.otf');
+    font-family: cooper;
+    src: url('/fonts/CooperBlackStd.otf');
 }
 
 root { 
@@ -26,41 +26,41 @@ html{
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8AC8E2), color-stop(100%,#29ABE2)); /* webkit */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8AC8E2', endColorstr='#29ABE2',GradientType=0 ); /* ie */
     background: -o-linear-gradient(top, #8AC8E2 0%,#29ABE2 100%); /* opera */
-    
+
     background-attachment: fixed;
-    
+
     height: 100%;
 }
 
 .content {
     position: relative;
     width: 600px;
-    
+
     margin-right: auto;
     margin-left: auto;
-    
+
     background: rgb(33,50,82);    
     background: -moz-linear-gradient(top, rgb(33,50,82) 0%, rgb(44,83,158) 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(33,50,82)), color-stop(100%,rgb(44,83,158)));
     background: -o-linear-gradient(top, rgb(33,50,82) 0%,rgb(44,83,158) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#213252', endColorstr='#2c539e',GradientType=0 );
-    
+
     box-shadow: 0px 0px 30px  rgba(0, 0, 0, 0.5);
     border-radius:  5px;
-    
+
     border: white solid 1px;
-    
+
 }
 
 .contentItem{
     position: relative;
     width: 95%;
-    
+
     margin: 10px;
-  
+
     border: white solid 1px;
     border-radius:  5px;
-    
+
     background: #8c481e; /* Old browsers */
     background: -moz-linear-gradient(top, #8c481e 0%, #af491a 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#8c481e), color-stop(100%,#af491a)); /* Chrome,Safari4+ */
@@ -75,10 +75,121 @@ html{
     font-family: cooper;
     font-size: 14px;
     color: white;
-    
+
     word-wrap:break-word;
-    
+
     padding: 5px;
     padding-right: 60px;
     text-align: justify;
+}
+
+.page{
+    position: relative;
+    width: 800px;
+
+    margin-right: auto;
+    margin-left: auto;
+
+    background: rgb(33,50,82);    
+    background: -moz-linear-gradient(top, rgb(33,50,82) 0%, rgb(44,83,158) 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgb(33,50,82)), color-stop(100%,rgb(44,83,158)));
+    background: -o-linear-gradient(top, rgb(33,50,82) 0%,rgb(44,83,158) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#213252', endColorstr='#2c539e',GradientType=0 );
+
+    box-shadow: 0px 0px 30px  rgba(0, 0, 0, 0.5);
+    border-radius:  5px;
+
+    border: white solid 1px;
+}
+
+.sideBar{
+    position:absolute;
+
+    width:200px;
+    right: 5px;
+    top: 5px;
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(194,82,8)),
+        color-stop(1, rgb(153,73,3))
+        );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(194,82,8) 0%,
+        rgb(153,73,3) 100%
+        );
+
+    border: #000 solid 1px;
+    border-radius:5px;
+}
+
+.sideBar h1{
+    font-family: cooper;
+    font-size: 20px;
+    text-align: center;
+    color:white;
+
+}
+
+.sideBar p{
+    font-family: cooper;
+    font-size: 14px;
+    text-align: justify;
+    color:white;
+
+    margin: 5px;
+    padding:5px;
+    border-radius:5px;
+    border: white 1px solid;
+    background-color: rgba(255,255,255,0.2);
+
+}
+.info{
+    position:relative;
+
+    width:550px;
+    margin: 10px;
+    padding: 5px;
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(194,82,8)),
+        color-stop(1, rgb(153,73,3))
+        );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(194,82,8) 0%,
+        rgb(153,73,3) 100%
+        );
+
+    border: #000 solid 1px;
+    border-radius:5px;
+}
+
+
+.info h1{
+    font-family: cooper;
+    font-size: 20px;
+    text-align: center;
+    color:white;
+
+}
+
+.info p{
+    font-family: cooper;
+    font-size: 14px;
+    text-align: justify;
+    color:white;
+
+    margin: 5px;
+    padding:5px;
+    border-radius:5px;
+    border: white 1px solid;
+    background-color: rgba(255,255,255,0.2);
+
 }

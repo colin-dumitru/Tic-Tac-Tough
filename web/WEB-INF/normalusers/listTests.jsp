@@ -12,6 +12,14 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/delete_button_hover.png";
+        img = new Image(); img.src = "/images/add_tests_button_hover.png";
+        img = new Image(); img.src = "/images/edit_test_button_hover.png";
+        img = new Image(); img.src = "/images/search_button_large_hover.png";
+    }
+</script>
 
 <script type="text/javascript" src="/scripts/jquery.js"></script>
 <script type="text/javascript" src="/scripts/testSearch.js"></script>
@@ -24,7 +32,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Take a test!</title>
     </head>
-    <body>
+    <body onload="preload();">
         <%-- ---------------------------------------------------------------------------------- --%>
         <%-- ----------------------Search Test--------------------------------------------- --%>
         <%-- ---------------------------------------------------------------------------------- --%>

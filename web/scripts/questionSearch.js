@@ -21,6 +21,12 @@ function addQuestionToTest(testId, questionId) {
         url: "/web/addQuestionToTest/" + testId + "/" + questionId,
         dataType: "txt"
     });
+    
+    hideAddButton(questionId);
+}
+
+function hideAddButton(questionId) {
+    $("#ba" + questionId).fadeOut("fast");
 }
 
 function parseQuestionResult(xmlData) {
@@ -35,8 +41,8 @@ function parseQuestionResult(xmlData) {
             <div class='contentText'>" + 
                 $(this).find("content").attr("value") +
             "</div>" +
-            "<button class='addToTestButton' onclick='addQuestionToTest(" + testId + "," 
-                    + $(this).find("id").attr("value") +")' value='add'/>" +
+            "<button class='addToTestButton' id='ba" + $(this).find("id").attr("value") +
+            "' onclick='addQuestionToTest(" + testId + "," + $(this).find("id").attr("value") +")' value='add'/>" +
         "</div>");
     });
 }

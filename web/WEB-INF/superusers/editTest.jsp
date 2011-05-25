@@ -12,10 +12,22 @@
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 
 <script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/search_button_hover.png";
+        img = new Image(); img.src = "/images/delete_button_hover.png";
+        img = new Image(); img.src = "/images/update_button_large_hover.png";
+        img = new Image(); img.src = "/images/search_button_large_hover.png";
+        img = new Image(); img.src = "/images/cancel_button_large_hover.png";
+    }
+</script>
+
+
+<script type="text/javascript">
     var testId = ${test.id};
     
     function init() {
         updateCategoryOption();
+        preload();
     }
     
     function updateCategoryOption() {
@@ -61,6 +73,7 @@
     /*ascunde dialogul de cautare de intrebare*/
     function hideSearchDialog() {
         document.getElementById("search").style.visibility = "hidden";
+        window.location.reload(true);
     }
     
     /*redirectioneaza catre stergerea de intrebare*/

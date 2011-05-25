@@ -9,6 +9,13 @@
 <LINK rel="stylesheet" href="/css/test.css" type="text/css" />
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 
+
+<script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/answer_button_hover.png";
+    }
+</script>
+
 <script type="text/javascript" src="/scripts/jquery.js"></script>
 <script type="text/javascript" src="/scripts/test.js"></script>
 
@@ -20,7 +27,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Take a test!</title>
     </head>
-    <body onload="initialize();">
+    <body onload="initialize();preload();">
         <div class="test">
             <div class="testTop">
                 <div class="totalQuestions" id="totalQuestions"> 5/4</div>

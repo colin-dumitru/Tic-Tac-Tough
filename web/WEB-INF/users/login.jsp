@@ -14,6 +14,13 @@
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 
 <script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/login_hover.png";
+        img = new Image(); img.src = "/images/register_hover.png";
+    }
+</script>
+
+<script type="text/javascript">
 function redirectLogin()
 {
     window.location = "/web/register";
@@ -30,7 +37,7 @@ function redirectLogin()
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login Page</title>
     </head>
-    <body>
+    <body onload="preload();">
         
         <c:if test="${not empty loginError}">
             <div id="error">

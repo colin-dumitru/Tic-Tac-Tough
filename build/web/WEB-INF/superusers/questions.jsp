@@ -8,6 +8,17 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/edit_button_hover.png";
+        img = new Image(); img.src = "/images/delete_button_hover.png";
+        img = new Image(); img.src = "/images/add_button_hover.png";
+        img = new Image(); img.src = "/images/add_button_large_hover.png";
+        img = new Image(); img.src = "/images/cancel_button_large_hover.png";
+    }
+</script>
+
+
 <LINK rel="stylesheet" href="/css/questions.css" type="text/css" />
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 

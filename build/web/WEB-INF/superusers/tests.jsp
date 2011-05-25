@@ -11,6 +11,14 @@
 <LINK rel="stylesheet" href="/css/tests.css" type="text/css" />
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 
+<script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/edit_button_hover.png";
+        img = new Image(); img.src = "/images/delete_button_hover.png";
+        img = new Image(); img.src = "/images/add_button_hover.png";
+    }
+</script>
+
 <script type="text/javascript" >
     //functie pentru redirectionare pt editarea unui test
     function editTest(id) {
@@ -36,7 +44,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Your tests.</title>
     </head>
-    <body>
+    <body onload="preload();">
         <jsp:include page="/WEB-INF/jspf/panel.jsp"></jsp:include>
         
         <%-- Verificam daca este setat atributul - adica daca cererea a venit din controller --%>

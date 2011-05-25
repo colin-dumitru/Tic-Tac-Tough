@@ -18,6 +18,13 @@ function redirectLogin()
 }
 </script>
 
+<script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/login_hover.png";
+        img = new Image(); img.src = "/images/register_hover.png";
+    }
+</script>
+
 <!DOCTYPE html>
 <html>
     
@@ -29,7 +36,7 @@ function redirectLogin()
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Page</title>
     </head>
-    <body>
+    <body onload="preload();">
         <c:if test="${not empty registerError}">
             <div id="error">
                 <c:out value="${registerError}" />

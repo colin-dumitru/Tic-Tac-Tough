@@ -5,8 +5,18 @@
 
 <LINK rel="stylesheet" href="/css/panel.css" type="text/css" />
 
+<script type="text/javascript">
+    function preload() {
+        img = new Image(); img.src = "/images/home_button_hover.png";
+        img = new Image(); img.src = "/images/edit_tests_button_hover.png";
+        img = new Image(); img.src = "/images/take_test_button_hover.png";
+        img = new Image(); img.src = "/images/add_button_hover.png";
+        img = new Image(); img.src = "/images/top_question_hover.png";
+    }
+</script>
+
 <%-- Bannerul de sus impreuna cu numele s linkul catre logout--%>
-<div class="banner" >
+<div class="banner" onload="preload();">
     <div class="name">${user.name}(${user.testScore})</div>
     <div class="logout"><a href = "/web/logout">(logout)</a></div>
 </div>
