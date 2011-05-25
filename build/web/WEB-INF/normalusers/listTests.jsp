@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<LINK rel="stylesheet" href="/css/takeTest.css" type="text/css" />
+<LINK rel="stylesheet" href="/css/listTests.css" type="text/css" />
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 
 <script type="text/javascript" src="/scripts/jquery.js"></script>

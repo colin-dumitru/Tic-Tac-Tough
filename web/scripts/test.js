@@ -6,6 +6,7 @@ var totalTime = 10.0;
 var remainingTime = 10.0;
 var context ;
 var working = false;
+var finished = false;
 
 function initialize() {
     context  = document.getElementById("timerCanvas").getContext("2d");
@@ -30,7 +31,8 @@ function update() {
         }
     }
     
-    setTimeout("update()",1000);
+    if(!finished)
+        setTimeout("update()",1000);
 }
 
 function advanceQuestion(answer) {
@@ -72,12 +74,20 @@ function updateQuestion(question) {
     $("#answer3Button").html($(question).find("answer3")[0].getAttribute("value"));
     $("#answer4Button").html($(question).find("answer4")[0].getAttribute("value"));
     
+    $("#result").visible = false;
+    
 }
 
 function updateResponse(response) {
-    totalTime = $(response).find("timePerQuestion")[0].getAttribute("value");
-    
+    /*facem update la timpul intrebarii*/
+    totalTime = $(response).find("timePerQuestion")[0].getAttribute("value");    
     resetTimer();
+    
+    /*plus la textul ce afiseaza nuamrul de intrebaril raspunse / numarul total de intrebari*/
+    $("#totalQuestions").html(
+        $(response).find("answered")[0].getAttribute("value") + " / " +
+            $(response).find("total")[0].getAttribute("value")
+    );
 }
 
 function resetTimer(){
@@ -85,7 +95,13 @@ function resetTimer(){
 }
 
 function updateResult(result) {
-    
+    /*setam scorul primit*/
+    $("#score").html($(result).find("score")[0].getAttribute("value"));
+    /*afisam overlayout*/
+     $("#result").slideDown("slow");    
+     
+     /*oprim timerul*/
+     finished = true;
 }
 
 function updateTime() {

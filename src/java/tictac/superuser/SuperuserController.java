@@ -551,6 +551,12 @@ public class SuperuserController {
             return "/web/error";
         }
         try {
+        
+            /*scoatem intrarile din toate testele in care exista*/
+            for(TestQuestion tq : this._testQuestionDao.listQuestionsWithQuestionId(questionId)) {
+                this._testQuestionDao.deleteTestQuestion(tq);
+            }
+            
             /*stergem intrebarea din baza de date*/
             this._questionDao.deleteQuestion(original);
         } catch (TransactionError ex) {
@@ -611,6 +617,62 @@ public class SuperuserController {
         }
 
         return "/web/editTest/" + testId;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+    @RequestMapping("/deleteTest/{testId}")
+    public String deleteTest(HttpSession session, Model model, @PathVariable("testId") long testId) {
+         /*verificam daca userul este logat*/
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            /*il redirectionam catre pagina principala*/
+            return "/web/home";
+        }
+
+        /*verificam daca are drepturile necsare*/
+        if (user.getType() != User.EDITOR_USER) {
+            model.addAttribute("error", "You do not have privilegies to acces this page");
+            return "/web/error";
+        }
+
+        List<Test> testList = null;
+
+        try {
+            /*luam testul cu id-ul respectiv*/
+            testList = this._testDao.findTestWithId(testId);
+        } catch (TransactionError ex) {
+            model.addAttribute("error", ex.toString());
+            return "/web/error";
+        }
+
+        /*verificam daca testul exista si daca a fost creeat de utilizatorul nostru*/
+        if (testList.size() != 1) {
+            model.addAttribute("error", "The test does not exist!");
+            return "/web/error";
+        }
+
+        /*luam testul original din baza de date cu id-ul specificat*/
+        Test original = testList.get(0);
+
+        if (original.getAuthorid() != user.getUserId().longValue()) {
+            model.addAttribute("error", "The question was not created by you!");
+            return "/web/error";
+        }
+        try {
+            /*luam test-question-urile de legatura si le stergem din baza de date*/
+            for(TestQuestion tq : this._testQuestionDao.listQuestionsWithTestId(original.getId())) {
+                this._testQuestionDao.deleteTestQuestion(tq);
+            }
+            
+            this._testDao.deleteTest(original);
+        } catch (TransactionError ex) {
+            Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        return "/web/tests";
     }
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------

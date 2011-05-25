@@ -24,6 +24,10 @@
     function showAddDialog() {
         document.getElementById("addTest").style.visibility = "visible";
     }
+    
+    function deleteTest(testId) {
+        window.location = "/web/deleteTest/" + testId.toString();
+    }
 </script>
 
 <!DOCTYPE html>
@@ -54,6 +58,7 @@
                 <div class = "test">
                     <div class = "testName" >${test.name} </div>
                     <button class = "testEditButton" onclick="editTest(${test.id})"></button>
+                    <button class = "deleteTestButton" onclick="deleteTest(${test.id})"></button>
                 </div>
             </c:forEach>
             

@@ -331,10 +331,14 @@ public class TestsService {
         
         user.setTestScore(user.getTestScore() + (int)score);
         
-        Element root = new DOMElement("score");
-        root.addAttribute("value", new Long(score).toString());
+        Element result = new DOMElement("result");
         
-        return root;
+        Element scoreElement = new DOMElement("score");
+        scoreElement.addAttribute("value", new Long(score).toString());
+        
+        result.add(scoreElement);
+        
+        return result;
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------

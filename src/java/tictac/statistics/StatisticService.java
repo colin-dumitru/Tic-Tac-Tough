@@ -4,7 +4,10 @@
  */
 package tictac.statistics;
 
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+import tictac.core.AplicationParams;
 import tictac.user.UserDao;
 
 /**
@@ -14,7 +17,14 @@ import tictac.user.UserDao;
 public class StatisticService {
     protected UserDao _userDao;    
     protected UserStatisticStrategy _userStrategy;
+    protected ResourceLoader _resourceLoader;
+    protected AplicationParams _params;
     
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public StatisticService() {
+        this._resourceLoader = new DefaultResourceLoader();
+    }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     public void update() {
@@ -23,7 +33,11 @@ public class StatisticService {
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     protected void updateUserTop() {
-        this.setUserStrategy(new TopUserStrategy());
+        UserStatisticStrategy strategy = new TopUserStrategy();
+        
+        strategy.setParams(this._params);
+        
+        this.setUserStrategy(strategy);
         this.compute();
     }
     //----------------------------------------------------------------------------------------------
@@ -48,5 +62,16 @@ public class StatisticService {
     public void setUserDao(UserDao _userDao) {
         this._userDao = _userDao;
     }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public AplicationParams getParams() {
+        return _params;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setParams(AplicationParams _params) {
+        this._params = _params;
+    }
+    
     
 }

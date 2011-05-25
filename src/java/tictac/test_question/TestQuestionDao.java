@@ -19,4 +19,6 @@ public interface TestQuestionDao {
     
     public List<TestQuestion> listQuestionsWithTestId(long testId) throws TransactionError;
     public List<TestQuestion> listQuestionsWithLink(long testId, long questionId) throws TransactionError;
+    public List<TestQuestion> listQuestionsWithQuestionId(long questionId) throws TransactionError;
+    
 }

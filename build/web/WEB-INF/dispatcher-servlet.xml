@@ -164,6 +164,10 @@
         <property name="userDao">
             <ref bean="userDao" />
         </property>
+        <property name="params">
+            <ref bean="aplicationParams" />
+        </property>
+        
     </bean>
     
     
@@ -250,6 +254,8 @@
     <!--
         Folost pentru a tine parametri aplicaitie : logger
     -->
-    <bean id = "aplicationParams" class = "tictac.core.AplicationParams"/>
+    <bean id = "aplicationParams" class = "tictac.core.AplicationParams">
+        <property name="context"> <ref bean="servletContext" /></property>
+    </bean>
     
 </beans>

@@ -63,6 +63,21 @@ public class BasicTestQuestionDao implements TestQuestionDao {
                 .add(Restrictions.eq("_testId", testId)).list();
            
     }
+        //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    
+    @Override
+    @SuppressWarnings("unchecked")
+    public List<TestQuestion> listQuestionsWithQuestionId(long questionId) throws TransactionError {
+        if (this._session == null || !this._session.isOpen()) {
+            throw new TransactionError("Session not opened");
+        }
+
+        return (List<TestQuestion>) this._session.createCriteria(TestQuestion.class)
+                .add(Restrictions.eq("_questionId", questionId)).list();
+           
+    }
+
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     @Override

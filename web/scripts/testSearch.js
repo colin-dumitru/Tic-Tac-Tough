@@ -20,6 +20,10 @@ function goToTest(testId){
     window.location = "/web/goToTest/" + testId;
 }
 
+function deleteTest(testId) {
+    window.location = "/web/deleteTest/" + testId;
+}
+
 function parseTestResult(xmlData){
     $("#testSearchResult").html("");
     
@@ -30,9 +34,9 @@ function parseTestResult(xmlData){
             <div class='contentText'>" + 
                 $(this).find("name").attr("value") +
             "</div>" +
-            "<button class='goToTestButton' onclick='goToTest(" 
-            + $(xmlData).find("id").attr("value") + 
-            ")' value='add'/>" +
+            "<button class='goToTestButton' onclick='goToTest("
+                + $(xmlData).find("id").attr("value") + 
+                ")' value='add'/>" +
         "</div>");
     });
 }

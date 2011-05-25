@@ -22,7 +22,10 @@
     </head>
     <body onload="initialize();">
         <div class="test">
-            <div class="testTop"></div>
+            <div class="testTop">
+                <div class="totalQuestions" id="totalQuestions"> 5/4</div>
+            </div>
+
             <div id="testContent" class="testContent">
                 <div class="testContentText" id ="testContentText">
                     Waiting for server...
@@ -34,10 +37,21 @@
             <div class="timerText" id="timerText" > 40 </div>
             <div class="timerOverlay" > </div>
 
-            <button class="answer1Button" id="answer1Button" onclick="advanceQuestion(1)">No answers yet...</button>
-            <button class="answer2Button" id="answer2Button" onclick="advanceQuestion(2)">No answers yet...</button>
-            <button class="answer3Button" id="answer3Button" onclick="advanceQuestion(3)">No answers yet...</button>
-            <button class="answer4Button" id="answer4Button" onclick="advanceQuestion(4)">No answers yet...</button>
+            <div class="asnwers">
+                <button class="answer1Button" id="answer1Button" onclick="advanceQuestion(1)">No answers yet...</button>
+                <button class="answer2Button" id="answer2Button" onclick="advanceQuestion(2)">No answers yet...</button>
+                <button class="answer3Button" id="answer3Button" onclick="advanceQuestion(3)">No answers yet...</button>
+                <button class="answer4Button" id="answer4Button" onclick="advanceQuestion(4)">No answers yet...</button>
+            </div>
+        </div>
+
+        <div class="result" id="result" hidden>
+            <div class="scoreLabel"> 
+                your score:
+                <button class="resultHomeButton" onclick="document.location='/web/home'"></button>
+            </div>
+            <div id="score" class="score">245</div>
+
         </div>
     </body>
 </html>

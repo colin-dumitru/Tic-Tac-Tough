@@ -13,8 +13,10 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.springframework.core.io.ResourceLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import tictac.core.AplicationParams;
 import tictac.user.TransactionError;
 import tictac.user.User;
 import tictac.user.UserDao;
@@ -26,6 +28,8 @@ import tictac.user.UserDao;
 public class TopUserStrategy implements UserStatisticStrategy{
     public static final int D_LIST_SIZE = 10;
     public static final String D_XML_PATH = "top_users.xml";
+    
+    protected AplicationParams _params;
     
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -54,7 +58,7 @@ public class TopUserStrategy implements UserStatisticStrategy{
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
-    protected void createXml(String path, List<User> users) {
+    protected void createXml(String path, List<User> users)  {
         Document doc = new DocumentImpl();
         
         /*elementul radacina*/
@@ -90,8 +94,11 @@ public class TopUserStrategy implements UserStatisticStrategy{
         FileOutputStream out = null;
          
         try {
-            out = new FileOutputStream(path);
+            out = new FileOutputStream(this._params.getContext().getContextPath() + path);
         } catch (FileNotFoundException ex) {
+            Logger.getLogger(TopUserStrategy.class.getName()).log(Level.SEVERE, null, ex);
+            return;
+        } catch(IOException ex) {
             Logger.getLogger(TopUserStrategy.class.getName()).log(Level.SEVERE, null, ex);
             return;
         }
@@ -114,5 +121,11 @@ public class TopUserStrategy implements UserStatisticStrategy{
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
-    
+
+    @Override
+    public void setParams(AplicationParams params) {
+        this._params = params;
+    }
+
+
 }

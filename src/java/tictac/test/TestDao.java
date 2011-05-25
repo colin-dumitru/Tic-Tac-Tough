@@ -14,6 +14,7 @@ import tictac.user.TransactionError;
  */
 public interface TestDao {
     public Test saveTest(Test test) throws TransactionError;
+    public void deleteTest(Test test) throws TransactionError;
     public List<Test> listTests() throws TransactionError;
     
     public List<Test> findTestWithId(long testId) throws TransactionError;

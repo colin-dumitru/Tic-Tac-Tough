@@ -117,4 +117,16 @@ public class BasicTestDao implements TestDao{
         
         return result;
     }
+     //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+
+    @Override
+    public void deleteTest(Test test) throws TransactionError {
+        if(this._session == null || !this._session.isOpen())
+            throw new TransactionError("Session not opened");
+            
+        this._session.beginTransaction();
+        this._session.delete(test);
+        this._session.getTransaction().commit();
+    }
 }

@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -17,7 +18,8 @@ import java.util.logging.Logger;
 public class AplicationParams {
     protected final static String LOGGER_FILE_NAME = "logg.txt";
     
-    BufferedWriter _logger;
+    protected BufferedWriter _logger;
+    protected ServletContext _context;
     
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------    
@@ -40,5 +42,14 @@ public class AplicationParams {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
+    public ServletContext getContext() {
+        return _context;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setContext(ServletContext _context) {
+        this._context = _context;
+    }
+ 
     
 }
