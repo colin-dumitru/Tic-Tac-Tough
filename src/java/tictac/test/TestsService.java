@@ -150,6 +150,29 @@ public class TestsService {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
+    public void incrementTestAccessed(long testId){
+        List<Test> result = null;
+        
+        try {
+            result = this._testDao.findTestWithId(testId);
+        } catch (TransactionError ex) {
+            Logger.getLogger(TestsService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /*luam testul cu id-ul respectiv*/
+        if(result == null || result.size() != 1)
+            return;
+        
+        Test test = result.get(0);
+        test.setAccessed(test.getAccessed()+1);
+        try {
+            this._testDao.saveTest(test);
+        } catch (TransactionError ex) {
+            Logger.getLogger(TestsService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     public Element advanceTest(HttpSession session, long answer) {
         /*luam testul pentru care se avanseaza testul*/
         Test test = (Test) session.getAttribute("currentTest");
@@ -342,7 +365,6 @@ public class TestsService {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
-
     public QuestionDao getQuestionDao() {
         return _questionDao;
     }

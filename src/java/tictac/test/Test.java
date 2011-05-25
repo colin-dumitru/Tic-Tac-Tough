@@ -48,6 +48,9 @@ public class Test implements Serializable {
     @Column(name = "useallq")
     protected int _useAllQuestions;
     
+    @Column(name = "accessed")
+    protected long _accessed;
+    
     public static final int USE_ALL_QUESTIONS = 1;
     public static final int RESTRAIN_QUESTIONS = 0;
     
@@ -151,6 +154,16 @@ public class Test implements Serializable {
     //----------------------------------------------------------------------------------------------
     public void setUseAllQuestions(int _useAllQuestions) {
         this._useAllQuestions = _useAllQuestions;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public long getAccessed() {
+        return _accessed;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setAccessed(long _accessed) {
+        this._accessed = _accessed;
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------

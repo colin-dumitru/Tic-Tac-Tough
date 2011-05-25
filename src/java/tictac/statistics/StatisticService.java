@@ -4,10 +4,14 @@
  */
 package tictac.statistics;
 
+<<<<<<< HEAD
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import tictac.core.AplicationParams;
+=======
+import tictac.test.TestDao;
+>>>>>>> b7ff8524747e946977dbb92a45cc2739a45144f5
 import tictac.user.UserDao;
 
 /**
@@ -16,9 +20,14 @@ import tictac.user.UserDao;
  */
 public class StatisticService {
     protected UserDao _userDao;    
+    protected TestDao _testDao;    
     protected UserStatisticStrategy _userStrategy;
+<<<<<<< HEAD
     protected ResourceLoader _resourceLoader;
     protected AplicationParams _params;
+=======
+    protected TestStaticticStrategy _testStrategy;
+>>>>>>> b7ff8524747e946977dbb92a45cc2739a45144f5
     
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -28,17 +37,29 @@ public class StatisticService {
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     public void update() {
-         this.updateUserTop();       
+         this.updateUserTop();
+         this.updateTestTop();
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
+<<<<<<< HEAD
     protected void updateUserTop() {
         UserStatisticStrategy strategy = new TopUserStrategy();
         
         strategy.setParams(this._params);
         
         this.setUserStrategy(strategy);
+=======
+    protected void updateUserTop() {        
+        this.setUserStrategy(new TopUserStrategy());
+>>>>>>> b7ff8524747e946977dbb92a45cc2739a45144f5
         this.compute();
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    private void updateTestTop() {
+        this.setTestStrategy(new TopTestStrategy());
+        this.compute();    
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -47,9 +68,17 @@ public class StatisticService {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
+    public void setTestStrategy(TestStaticticStrategy _testStrategy) {
+        this._testStrategy = _testStrategy;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     protected void compute() {
         if(this._userStrategy != null) {
             this._userStrategy.update(_userDao);
+        }
+        if(this._testStrategy != null) {
+            this._testStrategy.update(_testDao);
         }
     }
     //----------------------------------------------------------------------------------------------
@@ -64,6 +93,7 @@ public class StatisticService {
     }
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
+<<<<<<< HEAD
     public AplicationParams getParams() {
         return _params;
     }
@@ -73,5 +103,17 @@ public class StatisticService {
         this._params = _params;
     }
     
+=======
+    public TestDao getTestDao() {
+        return _testDao;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setTestDao(TestDao _testDao) {
+        this._testDao = _testDao;
+    }
+    
+    
+>>>>>>> b7ff8524747e946977dbb92a45cc2739a45144f5
     
 }

@@ -164,10 +164,16 @@
         <property name="userDao">
             <ref bean="userDao" />
         </property>
+<<<<<<< HEAD
         <property name="params">
             <ref bean="aplicationParams" />
         </property>
         
+=======
+        <property name="testDao">
+            <ref bean="testDao" />
+        </property>
+>>>>>>> b7ff8524747e946977dbb92a45cc2739a45144f5
     </bean>
     
     

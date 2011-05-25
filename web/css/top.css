@@ -1,0 +1,26 @@
+/* 
+    Document   : editTest
+    Created on : May 17, 2011, 8:03:23 PM
+    Author     : colin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+
+.topLabel{
+    position: relative;
+    top:10px;
+    left:95px;
+    font-family: cooper;
+    font-size: 15px;
+    color:white;
+}
