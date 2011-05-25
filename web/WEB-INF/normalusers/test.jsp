@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="result" id="result" hidden>
+        <div class="result" id="result" style="visibility:hidden;">
             <div class="scoreLabel"> 
                 your score:
                 <button class="resultHomeButton" onclick="document.location='/web/home'"></button>

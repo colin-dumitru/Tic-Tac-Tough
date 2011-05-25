@@ -72,10 +72,7 @@ function updateQuestion(question) {
     $("#answer1Button").html($(question).find("answer1")[0].getAttribute("value"));
     $("#answer2Button").html($(question).find("answer2")[0].getAttribute("value"));
     $("#answer3Button").html($(question).find("answer3")[0].getAttribute("value"));
-    $("#answer4Button").html($(question).find("answer4")[0].getAttribute("value"));
-    
-    $("#result").visible = false;
-    
+    $("#answer4Button").html($(question).find("answer4")[0].getAttribute("value"));    
 }
 
 function updateResponse(response) {
@@ -97,7 +94,8 @@ function resetTimer(){
 function updateResult(result) {
     /*setam scorul primit*/
     $("#score").html($(result).find("score")[0].getAttribute("value"));
-    /*afisam overlayout*/
+    /*afisam overlayout*/ 
+     $("#result").css("visibility", "visible");    
      $("#result").slideDown("slow");    
      
      /*oprim timerul*/
