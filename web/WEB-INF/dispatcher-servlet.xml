@@ -69,6 +69,7 @@
                 <value>tictac.question.Question</value>
                 <value>tictac.category.Category</value>
                 <value>tictac.test_question.TestQuestion</value>
+                <value>tictac.test_user.TestUser</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -143,6 +144,11 @@
             <ref bean="sessionFactory" /> 
         </property>
     </bean>
+    <bean id = "testUserDao" class = "tictac.test_user.BasicTestUserDao">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" /> 
+        </property>
+    </bean>
     <!-- ******************************Services***************************************** -->
     
     <!-- 
@@ -189,6 +195,9 @@
         </property>
         <property name="testQuestionDao">
             <ref bean="testQuestionDao" />
+        </property>
+        <property name="testUserDao">
+            <ref bean="testUserDao" />
         </property>
     </bean>
     
@@ -255,6 +264,9 @@
         </property>
         <property name="testQuestionDao">
             <ref bean="testQuestionDao" /> 
+        </property>
+        <property name="testUserDao">
+            <ref bean="testUserDao" /> 
         </property>
     </bean>
     

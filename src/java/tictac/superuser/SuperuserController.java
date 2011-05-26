@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import tictac.test_user.TestUserDao;
 import tictac.category.Category;
 import tictac.category.CategoryDao;
 import tictac.question.Question;
@@ -40,6 +41,7 @@ public class SuperuserController {
     protected CategoryDao _categoryDao;
     protected QuestionDao _questionDao;
     protected TestQuestionDao _testQuestionDao;
+    protected TestUserDao _testUserDao;
 
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
@@ -407,44 +409,48 @@ public class SuperuserController {
         /*verificam daca userul este logat*/
         User user = (User) session.getAttribute("user");
 
-        if (user == null) 
-            return ;
-        
+        if (user == null) {
+            return;
+        }
+
         /*luam testul cu id-ul respectiv si verificam drepturile*/
         List<Test> tests = null;
-        
+
         try {
             tests = this._testDao.findTestWithId(testId);
         } catch (TransactionError ex) {
             Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(tests == null || tests.size() != 1 || tests.get(0).getAuthorid() != user.getUserId())
-            return ;
-        
+
+        if (tests == null || tests.size() != 1 || tests.get(0).getAuthorid() != user.getUserId()) {
+            return;
+        }
+
         /*luam intrebarea cu id-ul specificat*/
         List<Question> questions = null;
-        
+
         try {
             questions = this._questionDao.findQuestionWithId(questionId);
         } catch (TransactionError ex) {
             Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        if(questions == null || questions.size() != 1)
+
+        if (questions == null || questions.size() != 1) {
             return;
-        
+        }
+
         try {
             /*verificam daca intrebarea este deja in test*/
-            if(this._testQuestionDao.listQuestionsWithLink(testId, questionId).size() > 0)
+            if (this._testQuestionDao.listQuestionsWithLink(testId, questionId).size() > 0) {
                 return;
+            }
         } catch (TransactionError ex) {
             Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         /*adaugam legatura in baza de date*/
         TestQuestion testQuestion = new TestQuestion(testId, questionId);
-        
+
         try {
             this._testQuestionDao.saveTestQuestion(testQuestion);
         } catch (TransactionError ex) {
@@ -559,12 +565,12 @@ public class SuperuserController {
             return "/web/error";
         }
         try {
-        
+
             /*scoatem intrarile din toate testele in care exista*/
-            for(TestQuestion tq : this._testQuestionDao.listQuestionsWithQuestionId(questionId)) {
+            for (TestQuestion tq : this._testQuestionDao.listQuestionsWithQuestionId(questionId)) {
                 this._testQuestionDao.deleteTestQuestion(tq);
             }
-            
+
             /*stergem intrebarea din baza de date*/
             this._questionDao.deleteQuestion(original);
         } catch (TransactionError ex) {
@@ -619,8 +625,8 @@ public class SuperuserController {
             return "/web/error";
         }
         List<TestQuestion> result = this._testQuestionDao.listQuestionsWithLink(testId, questionId);
-        
-        for(TestQuestion tq : result) {
+
+        for (TestQuestion tq : result) {
             this._testQuestionDao.deleteTestQuestion(tq);
         }
 
@@ -628,9 +634,10 @@ public class SuperuserController {
     }
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
+
     @RequestMapping("/deleteTest/{testId}")
     public String deleteTest(HttpSession session, Model model, @PathVariable("testId") long testId) {
-         /*verificam daca userul este logat*/
+        /*verificam daca userul este logat*/
         User user = (User) session.getAttribute("user");
 
         if (user == null) {
@@ -669,18 +676,65 @@ public class SuperuserController {
         }
         try {
             /*luam test-question-urile de legatura si le stergem din baza de date*/
-            for(TestQuestion tq : this._testQuestionDao.listQuestionsWithTestId(original.getId())) {
+            for (TestQuestion tq : this._testQuestionDao.listQuestionsWithTestId(original.getId())) {
                 this._testQuestionDao.deleteTestQuestion(tq);
             }
-            
+
             this._testDao.deleteTest(original);
         } catch (TransactionError ex) {
             Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
+
+
         return "/web/tests";
+    }
+
+    @RequestMapping("/viewUserScores/{testid}")
+    public String viewUserScores(HttpSession session, Model model, @PathVariable("testId") long testId) {
+        User user = (User) session.getAttribute("user");
+
+        if (user == null) {
+            /*il redirectionam catre pagina principala*/
+            return "/web/home";
+        }
+
+        /*verificam daca are drepturile necsare*/
+        if (user.getType() != User.EDITOR_USER) {
+            model.addAttribute("error", "You do not have privilegies to acces this page");
+            return "/web/error";
+        }
+
+        List<Test> testList = null;
+
+        try {
+            /*luam testul cu id-ul respectiv*/
+            testList = this._testDao.findTestWithId(testId);
+        } catch (TransactionError ex) {
+            model.addAttribute("error", ex.toString());
+            return "/web/error";
+        }
+
+        /*verificam daca testul exista si daca a fost creeat de utilizatorul nostru*/
+        if (testList.size() != 1) {
+            model.addAttribute("error", "The test does not exist!");
+            return "/web/error";
+        }
+
+        /*luam testul original din baza de date cu id-ul specificat*/
+        Test original = testList.get(0);
+
+        if (original.getAuthorid() != user.getUserId().longValue()) {
+            model.addAttribute("error", "The question was not created by you!");
+            return "/web/error";
+        }
+        try {
+            /*luam test-question-urile de legatura si le stergem din baza de date*/
+            model.addAttribute("testUserList", this._testUserDao.listRecordsWithTestId(testId));
+        } catch (TransactionError ex) {
+            Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "/WEB-INF/superusers/userScores.jsp";
     }
     //----------------------------------------------------------------------------------------------    
     //----------------------------------------------------------------------------------------------
@@ -741,5 +795,17 @@ public class SuperuserController {
 
     public void setTestQuestionDao(TestQuestionDao _testQuestionDao) {
         this._testQuestionDao = _testQuestionDao;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+
+    public TestUserDao getTestUserDao() {
+        return _testUserDao;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+
+    public void setTestUserDao(TestUserDao _testUserDao) {
+        this._testUserDao = _testUserDao;
     }
 }

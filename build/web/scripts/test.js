@@ -95,8 +95,9 @@ function updateResult(result) {
     /*setam scorul primit*/
     $("#score").html($(result).find("score")[0].getAttribute("value"));
     /*afisam overlayout*/ 
+     $("#result").fadeOut(0);    
      $("#result").css("visibility", "visible");    
-     $("#result").slideDown("slow");    
+     $("#result").fadeIn("slow");    
      
      /*oprim timerul*/
      finished = true;

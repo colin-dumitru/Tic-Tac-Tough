@@ -36,6 +36,10 @@
     function deleteTest(testId) {
         window.location = "/web/deleteTest/" + testId.toString();
     }
+    
+    function viewUserScores(testId){
+        window.location="/web/viewUserScores/" + testId.toString();
+    }
 </script>
 
 <!DOCTYPE html>
@@ -46,12 +50,12 @@
     </head>
     <body onload="preload();">
         <jsp:include page="/WEB-INF/jspf/panel.jsp"></jsp:include>
-        
+
         <%-- Verificam daca este setat atributul - adica daca cererea a venit din controller --%>
         <c:if test="empty testList">
             <c:redirect url="/web/home" />
         </c:if>
-        
+
         <div id="addTest" class = "addTest" >
             <form:form class="testForm" commandName="test" action="/web/addTest" >
                 <div class="testName">Test Name</div>
@@ -59,7 +63,7 @@
                 <input type="submit" class="createTestButton" value="" />
             </form:form>
         </div>  
-        
+
         <div class = "content">
             <%-- Listam testele efectuate de utilizator --%>
             <c:forEach var="test" items="${testList}">
@@ -67,9 +71,10 @@
                     <div class = "testName" >${test.name} </div>
                     <button class = "testEditButton" onclick="editTest(${test.id})"></button>
                     <button class = "deleteTestButton" onclick="deleteTest(${test.id})"></button>
+                    <button class = "viewUserScores" onclick="viewScores(${test.id})"></button>
                 </div>
             </c:forEach>
-            
+
             <button class="addButton" onclick="showAddDialog();"></button>
         </div>
     </body>
