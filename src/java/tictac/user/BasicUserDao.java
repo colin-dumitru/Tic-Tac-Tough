@@ -49,8 +49,8 @@ public class BasicUserDao implements UserDao{
             throw new TransactionError("Session not opened");
         
         this._session.beginTransaction();
-        
-        this._session.saveOrUpdate(user);
+          
+        this._session.saveOrUpdate( this._session.merge(user));
         
         this._session.getTransaction().commit();
     }

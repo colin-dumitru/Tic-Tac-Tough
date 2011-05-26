@@ -14,7 +14,7 @@
 .test {
     position: relative;
     width: 95%;
-    
+
     margin: 10px;
     height: 30px;
     background: #8c481e; /* Old browsers */
@@ -25,7 +25,7 @@
     background: -ms-linear-gradient(top, #8c481e 0%,#af491a 100%); /* IE10+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8C481E', endColorstr='#AF491A',GradientType=0 ); /* IE6-9 */
     background: linear-gradient(top, #8c481e 0%,#af491a 100%); /* W3C */
-    
+
     border: white solid 1px;
     border-radius: 5px;
 }
@@ -34,7 +34,8 @@
     font-family: cooper;
     font-size: 14px;
     color: white;
-    
+    text-align: left;
+
     padding: 5px;
 }
 
@@ -42,10 +43,10 @@
     position: absolute;
     background: url("/images/edit_button.png") center transparent;
     border: none;
-    
+
     left: 95%;
     top: -10px;
-    
+
     width: 50px;
     height: 50px;
 }
@@ -53,33 +54,43 @@
     position: absolute;
     background: url("/images/edit_button_hover.png") center transparent;
     border: none;
-    
+
     left: 95%;
     top: -10px;
-    
+
     width: 50px;
     height: 50px;
+}
+
+.testNameInput{
+    position:absolute;
+    right:10px;
+    top:5px;
+    font-family: cooper;
+    border-radius:5px;
 }
 
 .addButton {
     position: absolute;
     background: url("/images/add_button.png") center transparent;
     border: none;
-    
+
     right: -25px;
     bottom: -25px;
-    
+
     width: 50px;
     height: 50px;
 }
+
+
 .addButton:hover {
     position: absolute;
     background: url("/images/add_button_hover.png") center transparent;
     border: none;
-    
+
     right: -25px;
     bottom: -25px;
-    
+
     width: 50px;
     height: 50px;
 }
@@ -91,91 +102,145 @@
     left: 0px;
     height: 100%;
     width: 100%;
-    
+
     background-color: rgba(0,0,0,0.7);
     z-index: 2;
 }
 
 .createTestButton{
     position: absolute;
-    background: url("/images/add_button.png") center transparent;
+    background: url("/images/add_button_large.png") center transparent;
     border: none;    
-    
-    width: 50px;
+
+    left:10px;
+    top: 30px;
+
+    width: 120px;
+    height: 50px;
+}
+
+.createTestButton:hover{
+    position: absolute;
+    background: url("/images/add_button_large_hover.png") center transparent;
+    border: none;    
+
+    left:10px;
+    top: 30px;
+
+    width: 120px;
+    height: 50px;
+}
+
+.cancelButton{
+    position: absolute;
+    background: url("/images/cancel_button_large.png") center transparent;
+    border: none;    
+
+    right:10px;
+    top: 30px;
+
+    width: 120px;
+    height: 50px;
+}
+
+.cancelButton:hover{
+    position: absolute;
+    background: url("/images/cancel_button_large_hover.png") center transparent;
+    border: none;    
+
+    right:10px;
+    top: 30px;
+
+    width: 120px;
     height: 50px;
 }
 
 .testForm{
+    position: relative;
     margin-left: auto;
     margin-right: auto;
     margin-top: 300px;
-    
+
     width: 300px;
-    height: 100px;
-    
-    background-color: #66ccff;
+    height: 80px;
+
+    border: white solid 1px;
+    border-radius: 5px;
+
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.02, rgb(26,53,82)),
+        color-stop(1, rgb(28,90,138))
+        );
+    background-image: -moz-linear-gradient(
+        center bottom,
+        rgb(26,53,82) 2%,
+        rgb(28,90,138) 100%
+        );
 }
 
 .deleteTestButton{
     position:absolute;
-    
+
     background-color: transparent;
     background-image: url("/images/delete_button.png");
     background-position: center;
-    
+
     border:none;
-    
+
     width: 50px;
     height:50px;
-    
+
     top:-10px;
     right:15px;
 }
 
 .deleteTestButton:hover{
     position:absolute;
-    
+
     background-color: transparent;
     background-image: url("/images/delete_button_hover.png");
     background-position: center;
-    
+
     border:none;
-    
+
     width: 50px;
     height:50px;
-    
+
     top:-10px;
     right:15px;
 }
 
 .viewScoresButton{
     position:absolute;
-    
+
     background-color: transparent;
     background-image: url("/images/scores_button.png");
     background-position: center;
-    
+
     border:none;
-    
+
     width: 50px;
     height:50px;
-    
+
     top:-10px;
     right:52px;
 }
 
 .viewScoresButton:hover{
     position:absolute;
-    
+
     background-color: transparent;
     background-image: url("/images/scores_button_hover.png");
     background-position: center;
-    
+
     border:none;
-    
+
     width: 50px;
     height:50px;
-    
+
     top:-10px;
     right:52px;
 }

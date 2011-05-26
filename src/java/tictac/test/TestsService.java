@@ -27,6 +27,7 @@ import tictac.user.TransactionError;
 import tictac.user.UserService;
 import tictac.test_question.TestQuestionDao;
 import tictac.user.User;
+import tictac.user.UserDao;
 
 /**
  *
@@ -42,6 +43,7 @@ public class TestsService {
     protected TestQuestionDao _testQuestionDao;
     protected TestUserDao _testUserDao;
     protected DateFormat _df;
+    protected UserDao _userDao;
 
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -241,6 +243,15 @@ public class TestsService {
             score += this.handleQuestionAnswer(currentQuestion, answer, sentTime, test.getTime() * 1000);
             session.setAttribute("score", score);
         }
+        
+        /*verificam daca s-au terminat intrebarile*/
+        if (easyQuestions.size() <= 0 && mediumQuestions.size() <= 0 && hardQuestions.size() <= 0) {
+            return this.handleTestFinish(user, score, session);
+        } 
+        /*verificam daca s-a ajuns la numarul total de intrebari*/
+        else if ((test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS) && answered >= test.getNumq()) {
+            return this.handleTestFinish(user, score, session);
+        }
 
         /*apoi luam urmatoarea intrebare*/
         Question nextQuestion = this.nextQuestion(easyQuestions, hardQuestions, mediumQuestions, difficulty);
@@ -252,10 +263,10 @@ public class TestsService {
         session.setAttribute("mediumQuestions", mediumQuestions);
         session.setAttribute("hardQuestions", hardQuestions);
 
-        long numq = 0l;
+        int numq = 0;
 
         if (test.getUseAllQuestions() == Test.USE_ALL_QUESTIONS) {
-            numq = (long) session.getAttribute("totalQuestions");
+            numq = (int) session.getAttribute("totalQuestions");
         } else {
             numq = test.getNumq();
         }
@@ -263,13 +274,6 @@ public class TestsService {
         /*marim numarul de intrebari raspunse*/
         session.setAttribute("answered", answered + 1l);
 
-        /*verificam daca s-au terminat intrebarile*/
-        if (easyQuestions.size() <= 0 && mediumQuestions.size() <= 0 && hardQuestions.size() <= 0) {
-
-            return this.handleTestFinish(user, score, session);
-        } else if ((test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS) && answered >= test.getNumq()) {
-            return this.handleTestFinish(user, score, session);
-        }
 
         return this.constructResponse(nextQuestion, numq, answered, test.getTime());
     }
@@ -388,6 +392,12 @@ public class TestsService {
         session.removeAttribute("currentTest");
 
         user.setTestScore(user.getTestScore() + (int) score);
+        
+        try {
+            this._userDao.saveUser(user);
+        } catch (TransactionError ex) {
+            Logger.getLogger(TestsService.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
         Element result = new DOMElement("result");
 
@@ -473,4 +483,16 @@ public class TestsService {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, what);
         }
     }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public UserDao getUserDao() {
+        return _userDao;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public void setUserDao(UserDao _userDao) {
+        this._userDao = _userDao;
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
 }

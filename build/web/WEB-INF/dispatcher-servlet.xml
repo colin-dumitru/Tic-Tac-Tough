@@ -199,6 +199,9 @@
         <property name="testUserDao">
             <ref bean="testUserDao" />
         </property>
+        <property name="userDao">
+            <ref bean="userDao" />
+        </property>
     </bean>
     
     <!-- ********************************Controllers************************************** -->
@@ -242,7 +245,7 @@
         </property>
         <property name="categoryDao">
             <ref bean="categoryDao" />
-         </property>        
+        </property>        
     </bean>
     
         

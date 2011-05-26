@@ -60,8 +60,9 @@
         <div id="addTest" class = "addTest" >
             <form:form class="testForm" commandName="test" action="/web/addTest" >
                 <div class="testName">Test Name</div>
-                <form:input path="name" /> 
+                <form:input class="testNameInput" path="name" /> 
                 <input type="submit" class="createTestButton" value="" />
+                <button class="cancelButton" />
             </form:form>
         </div>  
 
