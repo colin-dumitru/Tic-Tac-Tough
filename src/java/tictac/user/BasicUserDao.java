@@ -74,6 +74,23 @@ public class BasicUserDao implements UserDao{
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     @Override
+    public User findUser(long id) throws TransactionError{
+          if(this._session == null || !this._session.isOpen())
+            throw new TransactionError("Session not opened");
+        
+        //this._session.beginTransaction();
+        List list = this._session.createCriteria(User.class)
+                .add(Restrictions.eq("_userId", id)).list();
+        
+        /*nu are trebuie sa fie niciodata 2 utilizatori cu acelasi username*/
+        if(list.size() != 1)
+            return null;
+        
+        return (User) list.get(0);            
+    }
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    @Override
     @SuppressWarnings("unchecked")
     public List<User> listUsers() throws TransactionError {
         if(this._session == null || !this._session.isOpen())

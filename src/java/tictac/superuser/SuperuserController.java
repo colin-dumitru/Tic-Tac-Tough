@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import tictac.test_user.TestUser;
 import tictac.test_user.TestUserDao;
 import tictac.category.Category;
 import tictac.category.CategoryDao;
@@ -26,8 +27,10 @@ import tictac.test.TestDao;
 import tictac.test.TestsService;
 import tictac.test_question.TestQuestion;
 import tictac.test_question.TestQuestionDao;
+import tictac.test_user.TestUserLink;
 import tictac.user.TransactionError;
 import tictac.user.User;
+import tictac.user.UserDao;
 
 /**
  *
@@ -38,6 +41,7 @@ public class SuperuserController {
 
     protected TestsService _testService;
     protected TestDao _testDao;
+    protected UserDao _userDao;
     protected CategoryDao _categoryDao;
     protected QuestionDao _questionDao;
     protected TestQuestionDao _testQuestionDao;
@@ -689,8 +693,9 @@ public class SuperuserController {
 
         return "/web/tests";
     }
-
-    @RequestMapping("/viewUserScores/{testid}")
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+    @RequestMapping("/viewUserScores/{testId}")
     public String viewUserScores(HttpSession session, Model model, @PathVariable("testId") long testId) {
         User user = (User) session.getAttribute("user");
 
@@ -725,12 +730,21 @@ public class SuperuserController {
         Test original = testList.get(0);
 
         if (original.getAuthorid() != user.getUserId().longValue()) {
-            model.addAttribute("error", "The question was not created by you!");
+            model.addAttribute("error", "The test was not created by you!");
             return "/web/error";
         }
         try {
-            /*luam test-question-urile de legatura si le stergem din baza de date*/
-            model.addAttribute("testUserList", this._testUserDao.listRecordsWithTestId(testId));
+            /*luam lista de rezultate*/
+            List<TestUser> links = this._testUserDao.listRecordsWithTestId(testId);
+            
+            /*apoi creeam o lista de legatura intre rezultate si user sa le tirmitem catre view*/
+            List<TestUserLink> result = new ArrayList<TestUserLink>();
+            
+            for(TestUser tu : links) {
+                result.add(new TestUserLink(tu, this._userDao.findUser(tu.getUserId())));
+            }
+            
+            model.addAttribute("resultList", result);
         } catch (TransactionError ex) {
             Logger.getLogger(SuperuserController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -808,4 +822,16 @@ public class SuperuserController {
     public void setTestUserDao(TestUserDao _testUserDao) {
         this._testUserDao = _testUserDao;
     }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+    public UserDao getUserDao() {
+        return _userDao;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
+    public void setUserDao(UserDao _userDao) {
+        this._userDao = _userDao;
+    }
+    //----------------------------------------------------------------------------------------------    
+    //----------------------------------------------------------------------------------------------
 }

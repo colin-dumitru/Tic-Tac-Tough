@@ -100,7 +100,6 @@ public class NormalUserController {
         
         /*cream testul*/
         this._testService.initializeTest(testId, session);
-        this._testService.createTestUser(testId, user.getUserId());
         this._testService.incrementTestAccessed(testId);
         /*intoarcem spre view-ul testului*/        
         return "/WEB-INF/normalusers/test.jsp"; //todo
@@ -137,6 +136,7 @@ public class NormalUserController {
     public void setCategoryDao(CategoryDao _categoryDao) {
         this._categoryDao = _categoryDao;
     }
-       
+      
+    
     
 }

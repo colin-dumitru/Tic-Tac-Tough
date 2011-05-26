@@ -1,0 +1,28 @@
+/* 
+    Document   : userScores
+    Created on : May 26, 2011, 11:20:57 AM
+    Author     : colin
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.resultRow{
+    width: 600px;
+    
+    font-family: cooper;
+    color: white;
+    
+    border: white solid 2px;
+    border-radius:5px;
+    margin: 10px;
+}
+

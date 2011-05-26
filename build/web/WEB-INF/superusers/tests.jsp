@@ -16,6 +16,7 @@
         img = new Image(); img.src = "/images/edit_button_hover.png";
         img = new Image(); img.src = "/images/delete_button_hover.png";
         img = new Image(); img.src = "/images/add_button_hover.png";
+        img = new Image(); img.src = "/images/scores_button_hover.png";
     }
 </script>
 
@@ -37,8 +38,8 @@
         window.location = "/web/deleteTest/" + testId.toString();
     }
     
-    function viewUserScores(testId){
-        window.location="/web/viewUserScores/" + testId.toString();
+    function viewScores(testId){
+        window.location = "/web/viewUserScores/" + testId.toString();
     }
 </script>
 
@@ -71,7 +72,7 @@
                     <div class = "testName" >${test.name} </div>
                     <button class = "testEditButton" onclick="editTest(${test.id})"></button>
                     <button class = "deleteTestButton" onclick="deleteTest(${test.id})"></button>
-                    <button class = "viewUserScores" onclick="viewScores(${test.id})"></button>
+                    <button class = "viewScoresButton" onclick="viewScores(${test.id})"></button>
                 </div>
             </c:forEach>
 

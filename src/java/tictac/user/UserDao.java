@@ -17,5 +17,6 @@ public interface UserDao {
     public List<User> listUsersByScore(boolean ascending) throws TransactionError;
     
     public User findUser(String userName) throws TransactionError;
+    public User findUser(long id) throws TransactionError;
     
 }

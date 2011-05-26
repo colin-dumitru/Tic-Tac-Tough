@@ -69,7 +69,7 @@
                 <value>tictac.question.Question</value>
                 <value>tictac.category.Category</value>
                 <value>tictac.test_question.TestQuestion</value>
-                <value>tictac.test_user.TestUser</value>
+                <value>tictac.test_user.TestUser</value> 
             </list>
         </property>
         <property name="hibernateProperties">
@@ -267,6 +267,9 @@
         </property>
         <property name="testUserDao">
             <ref bean="testUserDao" /> 
+        </property>
+        <property name="userDao">
+            <ref bean="userDao" />
         </property>
     </bean>
     

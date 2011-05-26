@@ -265,6 +265,7 @@ public class TestsService {
 
         /*verificam daca s-au terminat intrebarile*/
         if (easyQuestions.size() <= 0 && mediumQuestions.size() <= 0 && hardQuestions.size() <= 0) {
+
             return this.handleTestFinish(user, score, session);
         } else if ((test.getUseAllQuestions() == Test.RESTRAIN_QUESTIONS) && answered >= test.getNumq()) {
             return this.handleTestFinish(user, score, session);
@@ -379,10 +380,11 @@ public class TestsService {
     //----------------------------------------------------------------------------------------------
 
     protected Element handleTestFinish(User user, long score, HttpSession session) {
-        //update test_user table
-        Test test=(Test) session.getAttribute("currentTest");
+        /*salveam rezultatele in baza de date*/
+        Test test = (Test) session.getAttribute("currentTest");
         this.setScoreForTestUser(test.getId(), user.getUserId(), score);
 
+        /*consrtuim xml-ul cu rezultatele sa le trimitem inpoi*/
         session.removeAttribute("currentTest");
 
         user.setTestScore(user.getTestScore() + (int) score);
@@ -401,7 +403,7 @@ public class TestsService {
 
     protected void setScoreForTestUser(long testid, long userid, long score) {
         try {
-            this._testUserDao.saveTestUser(new TestUser(testid,userid,score));
+            this._testUserDao.saveTestUser(new TestUser(testid, userid, score));
         } catch (TransactionError ex) {
             Logger.getLogger(TestsService.class.getName()).log(Level.SEVERE, null, ex);
         }
