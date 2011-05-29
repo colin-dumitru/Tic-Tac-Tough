@@ -8,6 +8,7 @@ import java.util.List;
 import org.hibernate.classic.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.transaction.annotation.Transactional;
 import tictac.question.Question;
 import tictac.test.Test;
 import tictac.user.TransactionError;
@@ -38,15 +39,14 @@ public class BasicTestQuestionDao implements TestQuestionDao {
     //----------------------------------------------------------------------------------------------
 
     @Override
+    @Transactional
     public void saveTestQuestion(TestQuestion test_question) throws TransactionError {
         if (this._session == null || !this._session.isOpen()) {
             throw new TransactionError("Session not opened");
         }
 
         this._session.beginTransaction();
-
         this._session.saveOrUpdate(test_question);
-
         this._session.getTransaction().commit();
     }
 

@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import org.springframework.format.annotation.NumberFormat;
 
 /**
  *
@@ -20,12 +21,15 @@ import javax.persistence.Table;
 public class TestQuestion implements Serializable {
     @Id
     @GeneratedValue
+    @NumberFormat    
     @Column(name = "id")
-    protected Long _id;
+    protected long _id;
+    @NumberFormat
     @Column(name = "testid")
-    protected Long _testId;
+    protected long _testId;
+    @NumberFormat
     @Column(name = "questionid")
-    protected Long _questionId;
+    protected long _questionId;
 
     public TestQuestion() {
         this._testId = (long) 0;

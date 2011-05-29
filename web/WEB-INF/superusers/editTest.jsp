@@ -12,6 +12,8 @@
 <LINK rel="stylesheet" href="/css/common.css" type="text/css" />
 
 <script type="text/javascript">
+     var startUrl = window.location;
+    
     function preload() {
         img = new Image(); img.src = "/images/search_button_hover.png";
         img = new Image(); img.src = "/images/delete_button_hover.png";
@@ -73,7 +75,7 @@
     /*ascunde dialogul de cautare de intrebare*/
     function hideSearchDialog() {
         document.getElementById("search").style.visibility = "hidden";
-        window.location.reload(true);
+        window.location = "/web/editTest/" + ${test.id};
     }
     
     /*redirectioneaza catre stergerea de intrebare*/
