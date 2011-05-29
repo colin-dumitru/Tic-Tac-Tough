@@ -370,11 +370,11 @@ public class TestsService {
         } else {
             switch (current.getDifficulty().intValue()) {
                 case Question.D_EASY:
-                    return Test.EASY_SCORE * (-1);
+                    return Test.WRONG_SCORE;
                 case Question.D_MEDIUM:
-                    return Test.MEDIUM_SCORE * (-1);
+                    return Test.WRONG_SCORE;
                 case Question.D_HIGH:
-                    return Test.HARD_SCORE * (-1);
+                    return Test.WRONG_SCORE;
             }
         }
 

@@ -63,7 +63,7 @@ public class Test implements Serializable {
     public static final int MEDIUM_SCORE = 2;
     public static final int EASY_SCORE = 1;
     
-    
+    public static final int WRONG_SCORE = -1;
     
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
